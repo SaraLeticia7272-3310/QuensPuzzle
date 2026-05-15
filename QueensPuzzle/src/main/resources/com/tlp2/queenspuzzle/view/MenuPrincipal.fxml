@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.tlp2.queenspuzzle.controller.MenuPrincipalController"
+      alignment="CENTER" spacing="20"
+      style="-fx-background-color: #1a1a2e; -fx-padding: 40;">
+
+    <!-- Título -->
+    <Label text="♛ Queens Puzzle ♛"
+           style="-fx-font-size: 36; -fx-font-weight: bold; -fx-text-fill: #f0d060;"/>
+
+    <Label text="Posicione N rainhas sem que se ataquem"
+           style="-fx-font-size: 14; -fx-text-fill: #aaaaaa;"/>
+
+    <Separator style="-fx-background-color: #444466;" prefWidth="300"/>
+
+    <!-- Campo de nome -->
+    <VBox alignment="CENTER" spacing="8">
+        <Label text="Digite seu nome:" style="-fx-text-fill: white; -fx-font-size: 14;"/>
+        <TextField fx:id="campoNome" promptText="Seu nome aqui..."
+                   maxWidth="250"
+                   style="-fx-font-size: 14; -fx-background-color: #2d2d44; -fx-text-fill: white; -fx-prompt-text-fill: #888; -fx-padding: 8;"/>
+        <Label fx:id="labelMensagem" text="" style="-fx-text-fill: #e74c3c; -fx-font-size: 12;"/>
+    </VBox>
+
+    <!-- Botões do menu -->
+    <VBox alignment="CENTER" spacing="12">
+        <Button text="▶  JOGAR" onAction="#aoClicarJogar"
+                prefWidth="220" prefHeight="45"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;"/>
+
+        <Button text="🏆  RANKING" onAction="#aoClicarRanking"
+                prefWidth="220" prefHeight="40"
+                style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-size: 14; -fx-cursor: hand;"/>
+
+        <Button text="ℹ  CRÉDITOS" onAction="#aoClicarCreditos"
+                prefWidth="220" prefHeight="40"
+                style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-size: 14; -fx-cursor: hand;"/>
+
+        <Button text="✕  ENCERRAR" onAction="#aoClicarEncerrar"
+                prefWidth="220" prefHeight="40"
+                style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-size: 14; -fx-cursor: hand;"/>
+    </VBox>
+
+</VBox>

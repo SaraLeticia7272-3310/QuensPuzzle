@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.tlp2.queenspuzzle.controller.GameplayController"
+      spacing="20"
+      style="-fx-background-color: #1a1a2e; -fx-padding: 20;">
+
+    <!-- Lado esquerdo: tabuleiro -->
+    <VBox alignment="CENTER" spacing="10">
+        <Label text="♛ Queens Puzzle" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #f0d060;"/>
+
+        <GridPane fx:id="gridTabuleiro"
+                  style="-fx-border-color: #f0d060; -fx-border-width: 2;"/>
+
+        <Label fx:id="labelMensagem" text=""
+               style="-fx-font-size: 13; -fx-text-fill: white;" wrapText="true" maxWidth="340"/>
+    </VBox>
+
+    <!-- Lado direito: informações e botões -->
+    <VBox spacing="12" prefWidth="200" alignment="TOP_CENTER">
+
+        <!-- Infos do jogador -->
+        <VBox style="-fx-background-color: #2d2d44; -fx-padding: 12; -fx-background-radius: 8;" spacing="6">
+            <Label fx:id="labelNome" text="Jogador: " style="-fx-text-fill: #f0d060; -fx-font-weight: bold;"/>
+            <Label fx:id="labelNivel" text="Nível: 4x4" style="-fx-text-fill: white;"/>
+            <Label fx:id="labelPontos" text="Pontos: 0" style="-fx-text-fill: #2ecc71;"/>
+            <Label fx:id="labelMoedas" text="Moedas: 0" style="-fx-text-fill: #f39c12;"/>
+            <Label fx:id="labelTempo" text="Tempo: 60s" style="-fx-text-fill: #3498db; -fx-font-weight: bold;"/>
+            <Label fx:id="labelRainhas" text="Rainhas: 0/4" style="-fx-text-fill: #e74c3c;"/>
+        </VBox>
+
+        <!-- Regras rápidas -->
+        <VBox style="-fx-background-color: #2d2d44; -fx-padding: 10; -fx-background-radius: 8;" spacing="4">
+            <Label text="Como jogar:" style="-fx-text-fill: #f0d060; -fx-font-weight: bold;"/>
+            <Label text="• Clique para colocar rainha" style="-fx-text-fill: #aaa; -fx-font-size: 11;" wrapText="true"/>
+            <Label text="• Clique de novo para remover" style="-fx-text-fill: #aaa; -fx-font-size: 11;" wrapText="true"/>
+            <Label text="• Nenhuma na mesma linha," style="-fx-text-fill: #aaa; -fx-font-size: 11;" wrapText="true"/>
+            <Label text="  coluna ou diagonal" style="-fx-text-fill: #aaa; -fx-font-size: 11;" wrapText="true"/>
+            <Label text="• Vermelho = conflito" style="-fx-text-fill: #e74c3c; -fx-font-size: 11;"/>
+        </VBox>
+
+        <!-- Botões de ação -->
+        <Button fx:id="btnDica" text="Dica" onAction="#aoClicarDica"
+                prefWidth="180" prefHeight="36"
+                style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+
+        <Button text="Limpar Tabuleiro" onAction="#aoClicarLimpar"
+                prefWidth="180" prefHeight="36"
+                style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-cursor: hand;"/>
+
+        <Button text="🎒 Inventário" onAction="#aoClicarInventario"
+                prefWidth="180" prefHeight="36"
+                style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-cursor: hand;"/>
+
+        <Button text="🛒 Loja" onAction="#aoClicarLoja"
+                prefWidth="180" prefHeight="36"
+                style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-cursor: hand;"/>
+
+        <Button text="Menu Principal" onAction="#aoClicarMenu"
+                prefWidth="180" prefHeight="36"
+                style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-cursor: hand;"/>
+    </VBox>
+
+</HBox>

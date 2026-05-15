@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.tlp2.queenspuzzle.controller.BossController"
+      alignment="CENTER" spacing="15"
+      style="-fx-background-color: #1a0000; -fx-padding: 20;">
+
+    <Label text="⚔ DESAFIO FINAL ⚔"
+           style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #ff4444;"/>
+
+    <Label fx:id="labelStatus" text="" style="-fx-text-fill: #ffaa00; -fx-font-size: 13;" wrapText="true"/>
+
+    <HBox spacing="30" alignment="CENTER">
+        <Label fx:id="labelTempo" text="Tempo: 45s"
+               style="-fx-text-fill: white; -fx-font-size: 16; -fx-font-weight: bold;"/>
+        <Label fx:id="labelRainhas" text="Rainhas: 0/8"
+               style="-fx-text-fill: #ff4444; -fx-font-size: 16;"/>
+    </HBox>
+
+    <GridPane fx:id="gridTabuleiro"
+              style="-fx-border-color: #ff4444; -fx-border-width: 3;"/>
+
+    <Label fx:id="labelMensagem" text=""
+           style="-fx-font-size: 14; -fx-text-fill: white;" wrapText="true"/>
+
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Limpar" onAction="#aoClicarLimpar"
+                prefWidth="120" prefHeight="36"
+                style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-cursor: hand;"/>
+        <Button text="Menu Principal" onAction="#aoClicarMenu"
+                prefWidth="150" prefHeight="36"
+                style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-cursor: hand;"/>
+    </HBox>
+
+</VBox>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.tlp2.queenspuzzle.controller.RankingController"
+      alignment="CENTER" spacing="20"
+      style="-fx-background-color: #1a1a2e; -fx-padding: 40;">
+
+    <Label text="🏆 RANKING"
+           style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #f0d060;"/>
+
+    <TextArea fx:id="areaRanking"
+              editable="false" prefWidth="420" prefHeight="280"
+              style="-fx-font-family: monospace; -fx-font-size: 13; -fx-background-color: #2d2d44; -fx-text-fill: white; -fx-border-color: #444;"/>
+
+    <Label fx:id="labelMensagem" text="" style="-fx-text-fill: #2ecc71; -fx-font-size: 12;"/>
+
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Exportar CSV" onAction="#aoClicarExportarCSV"
+                prefWidth="140" prefHeight="38"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+        <Button text="Exportar TXT" onAction="#aoClicarExportarTXT"
+                prefWidth="140" prefHeight="38"
+                style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+        <Button text="◀ Voltar" onAction="#aoClicarVoltar"
+                prefWidth="100" prefHeight="38"
+                style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-cursor: hand;"/>
+    </HBox>
+
+</VBox>

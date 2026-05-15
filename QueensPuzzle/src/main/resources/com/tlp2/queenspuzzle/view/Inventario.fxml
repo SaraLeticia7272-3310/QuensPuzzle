@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.tlp2.queenspuzzle.controller.InventarioController"
+      alignment="CENTER" spacing="20"
+      style="-fx-background-color: #1a1a2e; -fx-padding: 30;">
+
+    <Label fx:id="labelTitulo" text="Inventário"
+           style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #f0d060;"/>
+
+    <TextArea fx:id="areaItens"
+              editable="false" prefWidth="340" prefHeight="220"
+              style="-fx-font-size: 13; -fx-background-color: #2d2d44; -fx-text-fill: white; -fx-border-color: #555;"/>
+
+    <Button text="Fechar" onAction="#aoClicarFechar"
+            prefWidth="120" prefHeight="36"
+            style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+
+</VBox>

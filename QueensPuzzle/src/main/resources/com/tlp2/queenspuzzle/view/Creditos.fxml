@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.tlp2.queenspuzzle.controller.CreditosController"
+      alignment="CENTER" spacing="18"
+      style="-fx-background-color: #1a1a2e; -fx-padding: 50;">
+
+    <Label text="♛ Queens Puzzle ♛"
+           style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #f0d060;"/>
+
+    <Separator prefWidth="350"/>
+
+    <VBox style="-fx-background-color: #2d2d44; -fx-padding: 25; -fx-background-radius: 10;" spacing="10" alignment="CENTER">
+        <Label text="CRÉDITOS" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: white;"/>
+
+        <Label text="Desenvolvedores:" style="-fx-text-fill: #aaa; -fx-font-size: 13;"/>
+        <Label text="[Nome do Aluno 1]  &amp;  [Nome do Aluno 2]"
+               style="-fx-text-fill: white; -fx-font-size: 15; -fx-font-weight: bold;"/>
+
+        <Separator prefWidth="300"/>
+
+        <Label text="Disciplina:" style="-fx-text-fill: #aaa; -fx-font-size: 13;"/>
+        <Label text="Programação Orientada a Objetos"
+               style="-fx-text-fill: white; -fx-font-size: 14;"/>
+
+        <Label text="Instituto Federal de Mato Grosso do Sul"
+               style="-fx-text-fill: #888; -fx-font-size: 12;"/>
+
+        <Separator prefWidth="300"/>
+
+        <Label text="Tecnologias utilizadas:" style="-fx-text-fill: #aaa; -fx-font-size: 13;"/>
+        <Label text="Java 17  •  JavaFX 17  •  FXML  •  PostgreSQL  •  JDBC"
+               style="-fx-text-fill: white; -fx-font-size: 12;"/>
+
+        <Separator prefWidth="300"/>
+
+        <Label text="Sobre o jogo:" style="-fx-text-fill: #aaa; -fx-font-size: 13;"/>
+        <Label text="Queens Puzzle é baseado no clássico problema N-Queens."
+               style="-fx-text-fill: white; -fx-font-size: 12;" wrapText="true" maxWidth="300"/>
+        <Label text="Posicione N rainhas num tabuleiro NxN sem que se ataquem."
+               style="-fx-text-fill: white; -fx-font-size: 12;" wrapText="true" maxWidth="300"/>
+    </VBox>
+
+    <Button text="◀ Voltar ao Menu" onAction="#aoClicarVoltar"
+            prefWidth="180" prefHeight="40"
+            style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-font-size: 14; -fx-cursor: hand;"/>
+
+</VBox>
