@@ -1,17 +1,22 @@
 package com.tlp2.queenspuzzle.controller;
 
+import com.tlp2.queenspuzzle.MainApp;
 import com.tlp2.queenspuzzle.dao.JogadorDAO;
 import com.tlp2.queenspuzzle.model.Jogador;
-import com.tlp2.queenspuzzle.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
+
 import java.io.*;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller do Ranking.
+ * Mostra o top 10 e permite exportar para CSV ou TXT.
+ */
 public class RankingController implements Initializable {
 
     @FXML private TextArea areaRanking;
@@ -28,23 +33,28 @@ public class RankingController implements Initializable {
         listaRanking = new JogadorDAO().getRanking();
 
         StringBuilder sb = new StringBuilder();
-        sb.append("══════════════════════════════\n");
-        sb.append("       RANKING - TOP 10       \n");
-        sb.append("══════════════════════════════\n\n");
+        sb.append("  Pos   Nome                  Pontos    Nível\n");
+        sb.append("  ─────────────────────────────────────────\n");
 
         if (listaRanking.isEmpty()) {
-            sb.append("Nenhum jogador cadastrado ainda.");
+            sb.append("\n  Nenhum jogador cadastrado ainda.\n");
+            sb.append("  Jogue e apareça aqui!");
         } else {
             for (int i = 0; i < listaRanking.size(); i++) {
                 Jogador j = listaRanking.get(i);
-                sb.append(String.format("%2d. %-20s %6d pts   Nv.%d\n",
-                        i + 1, j.getNome(), j.getPontuacaoTotal(), j.getNivelMaximo()));
+                String medalha = i == 0 ? "🥇" : i == 1 ? "🥈" : i == 2 ? "🥉" : "  " + (i + 1) + ".";
+                sb.append(String.format("  %-4s  %-20s  %6d    %dx%d\n",
+                        medalha, j.getNome(), j.getPontuacaoTotal(),
+                        j.getNivelMaximo(), j.getNivelMaximo()));
             }
         }
 
         areaRanking.setText(sb.toString());
     }
 
+    /**
+     * Exporta ranking como CSV.
+     */
     @FXML
     private void aoClicarExportarCSV() {
         FileChooser chooser = new FileChooser();
@@ -69,6 +79,9 @@ public class RankingController implements Initializable {
         }
     }
 
+    /**
+     * Exporta ranking como TXT formatado.
+     */
     @FXML
     private void aoClicarExportarTXT() {
         FileChooser chooser = new FileChooser();

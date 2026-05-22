@@ -1,13 +1,19 @@
 package com.tlp2.queenspuzzle.controller;
 
 import com.tlp2.queenspuzzle.model.*;
+import com.tlp2.queenspuzzle.model.SessaoJogo;
 import com.tlp2.queenspuzzle.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller da Loja.
+ * O jogador compra itens com moedas internas.
+ */
 public class LojaController implements Initializable {
 
     @FXML private Label labelMoedas;
@@ -25,6 +31,9 @@ public class LojaController implements Initializable {
         labelMoedas.setText("Suas moedas: " + sessao.getMoedas());
     }
 
+    /**
+     * Compra Poção de Tempo (+30s na próxima run) por 20 moedas.
+     */
     @FXML
     private void aoClicarComprarPocao() {
         if (sessao.gastarMoedas(20)) {
@@ -38,6 +47,9 @@ public class LojaController implements Initializable {
         }
     }
 
+    /**
+     * Compra Chave de Dica (1 dica extra) por 15 moedas.
+     */
     @FXML
     private void aoClicarComprarChave() {
         if (sessao.gastarMoedas(15)) {
@@ -51,6 +63,9 @@ public class LojaController implements Initializable {
         }
     }
 
+    /**
+     * Compra Amuleto de Pontos (+100 pontos bônus) por 25 moedas.
+     */
     @FXML
     private void aoClicarComprarAmuleto() {
         if (sessao.gastarMoedas(25)) {
@@ -64,11 +79,17 @@ public class LojaController implements Initializable {
         }
     }
 
+    /**
+     * Volta para Gameplay.
+     */
     @FXML
     private void aoClicarVoltar() {
         MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Gameplay.fxml");
     }
 
+    /**
+     * Volta para Upgrades.
+     */
     @FXML
     private void aoClicarUpgrades() {
         MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Upgrades.fxml");

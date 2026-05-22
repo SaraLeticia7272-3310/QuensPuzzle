@@ -5,70 +5,79 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.tlp2.queenspuzzle.controller.LojaController"
-      alignment="CENTER" spacing="20"
-      style="-fx-background-color: #1a1a2e; -fx-padding: 40;">
+      alignment="CENTER" spacing="16"
+      style="-fx-background-color: #f5f0ff; -fx-padding: 36;">
 
-    <Label text="🛒 LOJA REAL"
-           style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #f0d060;"/>
+    <Label text="🛒 Loja Real"
+           style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #7b5ea7;"/>
 
     <Label fx:id="labelMoedas" text="Suas moedas: 0"
-           style="-fx-text-fill: #f39c12; -fx-font-size: 16; -fx-font-weight: bold;"/>
+           style="-fx-text-fill: #ef82db; -fx-font-size: 15; -fx-font-weight: bold;"/>
 
-    <Separator prefWidth="400"/>
-
-    <!-- Itens da loja -->
-    <VBox spacing="15" style="-fx-background-color: #2d2d44; -fx-padding: 25; -fx-background-radius: 10;" alignment="CENTER">
+    <!-- Card de itens -->
+    <VBox spacing="14"
+          style="-fx-background-color: white; -fx-padding: 20 28; -fx-background-radius: 16; -fx-border-color: #d8b7fe; -fx-border-width: 1.5; -fx-border-radius: 16;"
+          alignment="CENTER_LEFT">
 
         <!-- Poção de Tempo -->
-        <HBox spacing="20" alignment="CENTER_LEFT">
-            <Label text="⏱" style="-fx-font-size: 28;"/>
-            <VBox HBox.hgrow="ALWAYS">
-                <Label text="Poção de Tempo" style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold;"/>
-                <Label text="+30 segundos na próxima run" style="-fx-text-fill: #aaa; -fx-font-size: 12;"/>
-                <Label text="Custo: 20 moedas" style="-fx-text-fill: #f39c12; -fx-font-size: 12;"/>
+        <HBox spacing="14" alignment="CENTER_LEFT">
+            <Label text="⏱" style="-fx-font-size: 30;"/>
+            <VBox HBox.hgrow="ALWAYS" spacing="2">
+                <Label text="Poção de Tempo"
+                       style="-fx-text-fill: #4a3060; -fx-font-size: 14; -fx-font-weight: bold;"/>
+                <Label text="+30 segundos na próxima run"
+                       style="-fx-text-fill: #9b80c4; -fx-font-size: 12;"/>
+                <Label text="💰 20 moedas"
+                       style="-fx-text-fill: #ef82db; -fx-font-size: 12;"/>
             </VBox>
             <Button text="Comprar" onAction="#aoClicarComprarPocao"
-                    style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" prefWidth="90"/>
+                    style="-fx-background-color: #c9e4ff; -fx-text-fill: #3a6080; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: #7ab8e8; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-cursor: hand;" prefWidth="88"/>
         </HBox>
 
-        <Separator prefWidth="380"/>
+        <Separator style="-fx-background-color: #ede8ff;"/>
 
         <!-- Chave de Dica -->
-        <HBox spacing="20" alignment="CENTER_LEFT">
-            <Label text="🗝" style="-fx-font-size: 28;"/>
-            <VBox HBox.hgrow="ALWAYS">
-                <Label text="Chave de Dica" style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold;"/>
-                <Label text="+1 dica na próxima run" style="-fx-text-fill: #aaa; -fx-font-size: 12;"/>
-                <Label text="Custo: 15 moedas" style="-fx-text-fill: #f39c12; -fx-font-size: 12;"/>
+        <HBox spacing="14" alignment="CENTER_LEFT">
+            <Label text="🗝" style="-fx-font-size: 30;"/>
+            <VBox HBox.hgrow="ALWAYS" spacing="2">
+                <Label text="Chave de Dica"
+                       style="-fx-text-fill: #4a3060; -fx-font-size: 14; -fx-font-weight: bold;"/>
+                <Label text="+1 dica na próxima run"
+                       style="-fx-text-fill: #9b80c4; -fx-font-size: 12;"/>
+                <Label text="💰 15 moedas"
+                       style="-fx-text-fill: #ef82db; -fx-font-size: 12;"/>
             </VBox>
             <Button text="Comprar" onAction="#aoClicarComprarChave"
-                    style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" prefWidth="90"/>
+                    style="-fx-background-color: #d8b7fe; -fx-text-fill: #4a2080; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: #b088e8; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-cursor: hand;" prefWidth="88"/>
         </HBox>
 
-        <Separator prefWidth="380"/>
+        <Separator style="-fx-background-color: #ede8ff;"/>
 
         <!-- Amuleto de Pontos -->
-        <HBox spacing="20" alignment="CENTER_LEFT">
-            <Label text="💎" style="-fx-font-size: 28;"/>
-            <VBox HBox.hgrow="ALWAYS">
-                <Label text="Amuleto Real" style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold;"/>
-                <Label text="+100 pontos bônus por vitória" style="-fx-text-fill: #aaa; -fx-font-size: 12;"/>
-                <Label text="Custo: 25 moedas" style="-fx-text-fill: #f39c12; -fx-font-size: 12;"/>
+        <HBox spacing="14" alignment="CENTER_LEFT">
+            <Label text="💎" style="-fx-font-size: 30;"/>
+            <VBox HBox.hgrow="ALWAYS" spacing="2">
+                <Label text="Amuleto Real"
+                       style="-fx-text-fill: #4a3060; -fx-font-size: 14; -fx-font-weight: bold;"/>
+                <Label text="+100 pontos bônus por vitória"
+                       style="-fx-text-fill: #9b80c4; -fx-font-size: 12;"/>
+                <Label text="💰 25 moedas"
+                       style="-fx-text-fill: #ef82db; -fx-font-size: 12;"/>
             </VBox>
             <Button text="Comprar" onAction="#aoClicarComprarAmuleto"
-                    style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" prefWidth="90"/>
+                    style="-fx-background-color: #fcc5fe; -fx-text-fill: #7a1080; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: #e099e8; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-cursor: hand;" prefWidth="88"/>
         </HBox>
     </VBox>
 
-    <Label fx:id="labelMensagem" text="" style="-fx-text-fill: #2ecc71; -fx-font-size: 13;"/>
+    <Label fx:id="labelMensagem" text="" style="-fx-text-fill: #7b5ea7; -fx-font-size: 13;"/>
 
-    <HBox spacing="15" alignment="CENTER">
+    <HBox spacing="12" alignment="CENTER">
         <Button text="◀ Voltar ao Jogo" onAction="#aoClicarVoltar"
-                prefWidth="160" prefHeight="38"
-                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 13; -fx-cursor: hand;"/>
+                prefWidth="155" prefHeight="38"
+                style="-fx-background-color: #bbc5ff; -fx-text-fill: #3a2080; -fx-font-size: 13; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #8b9fe8; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand;"/>
         <Button text="⬆ Upgrades" onAction="#aoClicarUpgrades"
                 prefWidth="130" prefHeight="38"
-                style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-cursor: hand;"/>
+                style="-fx-background-color: #d8b7fe; -fx-text-fill: #4a2080; -fx-background-radius: 10; -fx-border-color: #b088e8; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand;"/>
     </HBox>
 
 </VBox>

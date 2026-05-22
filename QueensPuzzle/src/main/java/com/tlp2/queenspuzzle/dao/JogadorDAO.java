@@ -5,8 +5,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO do Jogador: todas as operações de banco relacionadas ao jogador.
+ */
 public class JogadorDAO {
 
+    /**
+     * Salva um novo jogador no banco.
+     * Retorna o jogador com o ID gerado pelo banco.
+     */
     public Jogador salvar(Jogador jogador) {
         String sql = "INSERT INTO jogador (nome, pontuacao_total, nivel_maximo) VALUES (?, ?, ?) RETURNING id";
         try (Connection conn = ConexaoBanco.getConexao();
@@ -26,6 +33,10 @@ public class JogadorDAO {
         return jogador;
     }
 
+    /**
+     * Busca um jogador pelo nome.
+     * Retorna null se não encontrar.
+     */
     public Jogador buscarPorNome(String nome) {
         String sql = "SELECT * FROM jogador WHERE nome = ?";
         try (Connection conn = ConexaoBanco.getConexao();
@@ -48,6 +59,9 @@ public class JogadorDAO {
         return null;
     }
 
+    /**
+     * Atualiza pontuação e nível máximo do jogador.
+     */
     public void atualizar(Jogador jogador) {
         String sql = "UPDATE jogador SET pontuacao_total = ?, nivel_maximo = ? WHERE id = ?";
         try (Connection conn = ConexaoBanco.getConexao();
@@ -63,6 +77,9 @@ public class JogadorDAO {
         }
     }
 
+    /**
+     * Retorna lista dos top 10 jogadores por pontuação (ranking).
+     */
     public List<Jogador> getRanking() {
         List<Jogador> lista = new ArrayList<>();
         String sql = "SELECT * FROM jogador ORDER BY pontuacao_total DESC LIMIT 10";

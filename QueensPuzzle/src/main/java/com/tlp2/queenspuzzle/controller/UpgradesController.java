@@ -6,9 +6,14 @@ import com.tlp2.queenspuzzle.model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller da tela de Upgrades.
+ * O jogador gasta pontos da rodada para melhorar permanentemente.
+ */
 public class UpgradesController implements Initializable {
 
     @FXML private Label labelNome;
@@ -22,6 +27,7 @@ public class UpgradesController implements Initializable {
     private SessaoJogo sessao;
     private int pontosDisponiveis;
 
+    // Custo de cada upgrade em pontos
     private static final int CUSTO_DICA = 200;
     private static final int CUSTO_TEMPO = 150;
     private static final int CUSTO_PONTOS = 100;
@@ -47,6 +53,9 @@ public class UpgradesController implements Initializable {
         labelProximoNivel.setText("Próxima run: tabuleiro " + proximoNivel + "x" + proximoNivel);
     }
 
+    /**
+     * Compra +1 dica extra por run.
+     */
     @FXML
     private void aoClicarComprarDica() {
         if (pontosDisponiveis >= CUSTO_DICA) {
@@ -61,6 +70,9 @@ public class UpgradesController implements Initializable {
         }
     }
 
+    /**
+     * Compra +15 segundos por run.
+     */
     @FXML
     private void aoClicarComprarTempo() {
         if (pontosDisponiveis >= CUSTO_TEMPO) {
@@ -75,6 +87,9 @@ public class UpgradesController implements Initializable {
         }
     }
 
+    /**
+     * Compra +50 pontos bônus por run completada.
+     */
     @FXML
     private void aoClicarComprarPontos() {
         if (pontosDisponiveis >= CUSTO_PONTOS) {
@@ -99,23 +114,33 @@ public class UpgradesController implements Initializable {
         }
     }
 
+    /**
+     * Botão JOGAR NOVAMENTE: inicia nova run no próximo nível.
+     */
     @FXML
     private void aoClicarJogarNovamente() {
         Jogador j = sessao.getJogadorAtual();
         sessao.setNivelAtual(j.getNivelMaximo());
 
-        if (j.getNivelMaximo() >= 7) {
+        // Boss desbloqueado a partir do nível 8
+        if (j.getNivelMaximo() >= 8) {
             MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Boss.fxml");
         } else {
             MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Gameplay.fxml");
         }
     }
 
+    /**
+     * Botão LOJA
+     */
     @FXML
     private void aoClicarLoja() {
         MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Loja.fxml");
     }
 
+    /**
+     * Botão MENU PRINCIPAL
+     */
     @FXML
     private void aoClicarMenu() {
         MainApp.trocarTela("/com/tlp2/queenspuzzle/view/MenuPrincipal.fxml");

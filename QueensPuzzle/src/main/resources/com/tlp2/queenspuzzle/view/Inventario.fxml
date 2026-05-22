@@ -5,18 +5,19 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.tlp2.queenspuzzle.controller.InventarioController"
-      alignment="CENTER" spacing="20"
-      style="-fx-background-color: #1a1a2e; -fx-padding: 30;">
+      alignment="CENTER" spacing="16"
+      style="-fx-background-color: #f5f0ff; -fx-padding: 28;">
 
+    <Label text="🎒" style="-fx-font-size: 36;"/>
     <Label fx:id="labelTitulo" text="Inventário"
-           style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #f0d060;"/>
+           style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7b5ea7;"/>
 
     <TextArea fx:id="areaItens"
-              editable="false" prefWidth="340" prefHeight="220"
-              style="-fx-font-size: 13; -fx-background-color: #2d2d44; -fx-text-fill: white; -fx-border-color: #555;"/>
+              editable="false" prefWidth="340" prefHeight="200"
+              style="-fx-font-size: 13; -fx-background-color: white; -fx-text-fill: #4a3060; -fx-border-color: #d8b7fe; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10;"/>
 
-    <Button text="Fechar" onAction="#aoClicarFechar"
+    <Button text="✕ Fechar" onAction="#aoClicarFechar"
             prefWidth="120" prefHeight="36"
-            style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+            style="-fx-background-color: #fcc5fe; -fx-text-fill: #7a1080; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #e099e8; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand;"/>
 
 </VBox>

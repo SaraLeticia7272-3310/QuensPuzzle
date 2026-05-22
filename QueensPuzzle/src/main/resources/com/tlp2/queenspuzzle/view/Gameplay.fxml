@@ -5,63 +5,83 @@
 
 <HBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.tlp2.queenspuzzle.controller.GameplayController"
-      spacing="20"
-      style="-fx-background-color: #1a1a2e; -fx-padding: 20;">
+      spacing="18"
+      style="-fx-background-color: #f5f0ff; -fx-padding: 18;">
 
     <!-- Lado esquerdo: tabuleiro -->
     <VBox alignment="CENTER" spacing="10">
-        <Label text="♛ Queens Puzzle" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #f0d060;"/>
+        <Label text="♛ Queens Puzzle"
+               style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7b5ea7;"/>
 
-        <GridPane fx:id="gridTabuleiro"
-                  style="-fx-border-color: #f0d060; -fx-border-width: 2;"/>
-
-        <Label fx:id="labelMensagem" text=""
-               style="-fx-font-size: 13; -fx-text-fill: white;" wrapText="true" maxWidth="340"/>
-    </VBox>
-
-    <!-- Lado direito: informações e botões -->
-    <VBox spacing="12" prefWidth="200" alignment="TOP_CENTER">
-
-        <!-- Infos do jogador -->
-        <VBox style="-fx-background-color: #2d2d44; -fx-padding: 12; -fx-background-radius: 8;" spacing="6">
-            <Label fx:id="labelNome" text="Jogador: " style="-fx-text-fill: #f0d060; -fx-font-weight: bold;"/>
-            <Label fx:id="labelNivel" text="Nível: 4x4" style="-fx-text-fill: white;"/>
-            <Label fx:id="labelPontos" text="Pontos: 0" style="-fx-text-fill: #2ecc71;"/>
-            <Label fx:id="labelMoedas" text="Moedas: 0" style="-fx-text-fill: #f39c12;"/>
-            <Label fx:id="labelTempo" text="Tempo: 60s" style="-fx-text-fill: #3498db; -fx-font-weight: bold;"/>
-            <Label fx:id="labelRainhas" text="Rainhas: 0/4" style="-fx-text-fill: #e74c3c;"/>
+        <!-- Regras resumidas -->
+        <VBox style="-fx-background-color: #ede8ff; -fx-padding: 8 14; -fx-background-radius: 10;" spacing="2">
+            <Label text="1 rainha por cor    •    sem mesma linha ou coluna"
+                   style="-fx-font-size: 11; -fx-text-fill: #9b80c4;"/>
+            <Label text="rainhas não podem ser adjacentes (nem diagonal)"
+                   style="-fx-font-size: 11; -fx-text-fill: #9b80c4;"/>
         </VBox>
 
-        <!-- Regras rápidas -->
-        <VBox style="-fx-background-color: #2d2d44; -fx-padding: 10; -fx-background-radius: 8;" spacing="4">
-            <Label text="Como jogar:" style="-fx-text-fill: #f0d060; -fx-font-weight: bold;"/>
-            <Label text="• Clique para colocar rainha" style="-fx-text-fill: #aaa; -fx-font-size: 11;" wrapText="true"/>
-            <Label text="• Clique de novo para remover" style="-fx-text-fill: #aaa; -fx-font-size: 11;" wrapText="true"/>
-            <Label text="• Nenhuma na mesma linha," style="-fx-text-fill: #aaa; -fx-font-size: 11;" wrapText="true"/>
-            <Label text="  coluna ou diagonal" style="-fx-text-fill: #aaa; -fx-font-size: 11;" wrapText="true"/>
-            <Label text="• Vermelho = conflito" style="-fx-text-fill: #e74c3c; -fx-font-size: 11;"/>
+        <GridPane fx:id="gridTabuleiro"
+                  style="-fx-border-color: #d8b7fe; -fx-border-width: 2.5; -fx-border-radius: 4; -fx-background-color: white;"/>
+
+        <Label fx:id="labelMensagem" text=""
+               style="-fx-font-size: 13; -fx-text-fill: #7b5ea7;" wrapText="true" maxWidth="360"/>
+    </VBox>
+
+    <!-- Lado direito: painel de infos e botões -->
+    <VBox spacing="10" prefWidth="185" alignment="TOP_CENTER">
+
+        <!-- Card de stats -->
+        <VBox style="-fx-background-color: white; -fx-padding: 14; -fx-background-radius: 14; -fx-border-color: #d8b7fe; -fx-border-width: 1.5; -fx-border-radius: 14;" spacing="7">
+            <Label fx:id="labelNome" text="Jogador"
+                   style="-fx-text-fill: #7b5ea7; -fx-font-weight: bold; -fx-font-size: 13;"/>
+            <Label fx:id="labelNivel" text="Nível 5×5"
+                   style="-fx-text-fill: #9b80c4; -fx-font-size: 12;"/>
+
+            <Separator style="-fx-background-color: #ede8ff;"/>
+
+            <HBox spacing="6" alignment="CENTER_LEFT">
+                <Label text="⭐" style="-fx-font-size: 14;"/>
+                <Label fx:id="labelPontos" text="Pontos: 0"
+                       style="-fx-text-fill: #bbc5ff; -fx-font-weight: bold; -fx-font-size: 13;"/>
+            </HBox>
+            <HBox spacing="6" alignment="CENTER_LEFT">
+                <Label text="💰" style="-fx-font-size: 14;"/>
+                <Label fx:id="labelMoedas" text="Moedas: 0"
+                       style="-fx-text-fill: #ef82db; -fx-font-size: 12;"/>
+            </HBox>
+            <HBox spacing="6" alignment="CENTER_LEFT">
+                <Label text="⏱" style="-fx-font-size: 14;"/>
+                <Label fx:id="labelTempo" text="90s"
+                       style="-fx-text-fill: #c9e4ff; -fx-font-weight: bold; -fx-font-size: 13;"/>
+            </HBox>
+            <HBox spacing="6" alignment="CENTER_LEFT">
+                <Label text="♛" style="-fx-font-size: 14; -fx-text-fill: #d8b7fe;"/>
+                <Label fx:id="labelRainhas" text="Rainhas: 0/5"
+                       style="-fx-text-fill: #d8b7fe; -fx-font-size: 12;"/>
+            </HBox>
         </VBox>
 
         <!-- Botões de ação -->
-        <Button fx:id="btnDica" text="Dica" onAction="#aoClicarDica"
-                prefWidth="180" prefHeight="36"
-                style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+        <Button fx:id="btnDica" text="💡 Dica (1)" onAction="#aoClicarDica"
+                prefWidth="178" prefHeight="36"
+                style="-fx-background-color: #fcc5fe; -fx-text-fill: #7a1080; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #e099e8; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand;"/>
 
-        <Button text="Limpar Tabuleiro" onAction="#aoClicarLimpar"
-                prefWidth="180" prefHeight="36"
-                style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-cursor: hand;"/>
+        <Button text="🗑 Limpar" onAction="#aoClicarLimpar"
+                prefWidth="178" prefHeight="34"
+                style="-fx-background-color: #ede8ff; -fx-text-fill: #7b5ea7; -fx-background-radius: 10; -fx-border-color: #d8b7fe; -fx-border-radius: 10; -fx-border-width: 1; -fx-cursor: hand;"/>
 
         <Button text="🎒 Inventário" onAction="#aoClicarInventario"
-                prefWidth="180" prefHeight="36"
-                style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-cursor: hand;"/>
+                prefWidth="178" prefHeight="34"
+                style="-fx-background-color: #d8b7fe; -fx-text-fill: #4a2080; -fx-background-radius: 10; -fx-border-color: #b088e8; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand;"/>
 
         <Button text="🛒 Loja" onAction="#aoClicarLoja"
-                prefWidth="180" prefHeight="36"
-                style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-cursor: hand;"/>
+                prefWidth="178" prefHeight="34"
+                style="-fx-background-color: #bbc5ff; -fx-text-fill: #3a2080; -fx-background-radius: 10; -fx-border-color: #8b9fe8; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand;"/>
 
-        <Button text="Menu Principal" onAction="#aoClicarMenu"
-                prefWidth="180" prefHeight="36"
-                style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-cursor: hand;"/>
+        <Button text="↩ Menu" onAction="#aoClicarMenu"
+                prefWidth="178" prefHeight="32"
+                style="-fx-background-color: #f5f0ff; -fx-text-fill: #9b80c4; -fx-background-radius: 10; -fx-border-color: #d8b7fe; -fx-border-radius: 10; -fx-border-width: 1; -fx-cursor: hand;"/>
     </VBox>
 
 </HBox>

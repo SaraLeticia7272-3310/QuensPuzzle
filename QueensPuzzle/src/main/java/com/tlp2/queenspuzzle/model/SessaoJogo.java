@@ -3,23 +3,34 @@ package com.tlp2.queenspuzzle.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Guarda os dados da sessão atual do jogo.
+ * Singleton: existe só uma instância, compartilhada entre todas as telas.
+ * 
+ * Isso permite passar informações entre controllers sem complicação.
+ */
 public class SessaoJogo {
 
+    // Instância única (padrão Singleton simples)
     private static SessaoJogo instancia;
 
     private Jogador jogadorAtual;
     private Upgrade upgradeAtual;
-    private int pontuacaoRodada;      
-    private int nivelAtual;           
-    private int moedas;               
-    private List<Item> inventario;    
+    private int pontuacaoRodada;      // pontos da run atual
+    private int nivelAtual;           // tamanho do tabuleiro desta run
+    private int moedas;               // moeda interna do jogo
+    private List<Item> inventario;    // itens da run atual
 
+    // Construtor privado (Singleton)
     private SessaoJogo() {
         this.inventario = new ArrayList<>();
         this.nivelAtual = 4;
         this.moedas = 0;
     }
 
+    /**
+     * Retorna a instância única da sessão.
+     */
     public static SessaoJogo getInstance() {
         if (instancia == null) {
             instancia = new SessaoJogo();
@@ -27,63 +38,38 @@ public class SessaoJogo {
         return instancia;
     }
 
+    /**
+     * Inicia uma nova run.
+     */
     public void iniciarNovaRun() {
         this.pontuacaoRodada = 0;
         this.inventario = new ArrayList<>();
     }
 
+    /**
+     * Adiciona item ao inventário da run.
+     */
     public void adicionarItem(Item item) {
         inventario.add(item);
     }
 
-    public Jogador getJogadorAtual() { 
-        return jogadorAtual; 
-    }
-    
-    public void setJogadorAtual(Jogador jogador) { 
-        this.jogadorAtual = jogador; 
-    }
+    // Getters e Setters
+    public Jogador getJogadorAtual() { return jogadorAtual; }
+    public void setJogadorAtual(Jogador jogador) { this.jogadorAtual = jogador; }
 
-    public Upgrade getUpgradeAtual() { 
-        return upgradeAtual; 
-    }
-    
-    public void setUpgradeAtual(Upgrade upgrade) { 
-        this.upgradeAtual = upgrade; 
-    }
+    public Upgrade getUpgradeAtual() { return upgradeAtual; }
+    public void setUpgradeAtual(Upgrade upgrade) { this.upgradeAtual = upgrade; }
 
-    public int getPontuacaoRodada() { 
-        return pontuacaoRodada; 
-    }
-    
-    public void setPontuacaoRodada(int pontos) { 
-        this.pontuacaoRodada = pontos; 
-    }
-    
-    public void adicionarPontos(int pontos) { 
-        this.pontuacaoRodada += pontos; 
-    }
+    public int getPontuacaoRodada() { return pontuacaoRodada; }
+    public void setPontuacaoRodada(int pontos) { this.pontuacaoRodada = pontos; }
+    public void adicionarPontos(int pontos) { this.pontuacaoRodada += pontos; }
 
-    public int getNivelAtual() { 
-        return nivelAtual; 
-    }
-    
-    public void setNivelAtual(int nivel) { 
-        this.nivelAtual = nivel; 
-    }
+    public int getNivelAtual() { return nivelAtual; }
+    public void setNivelAtual(int nivel) { this.nivelAtual = nivel; }
 
-    public int getMoedas() { 
-        return moedas; 
-    }
-    
-    public void setMoedas(int moedas) { 
-        this.moedas = moedas; 
-    }
-    
-    public void adicionarMoedas(int valor) { 
-        this.moedas += valor; 
-    }
-    
+    public int getMoedas() { return moedas; }
+    public void setMoedas(int moedas) { this.moedas = moedas; }
+    public void adicionarMoedas(int valor) { this.moedas += valor; }
     public boolean gastarMoedas(int valor) {
         if (moedas >= valor) {
             moedas -= valor;
@@ -92,7 +78,5 @@ public class SessaoJogo {
         return false;
     }
 
-    public List<Item> getInventario() { 
-        return inventario; 
-    }
+    public List<Item> getInventario() { return inventario; }
 }

@@ -3,8 +3,14 @@ package com.tlp2.queenspuzzle.dao;
 import com.tlp2.queenspuzzle.model.Upgrade;
 import java.sql.*;
 
+/**
+ * DAO do Upgrade: salva e busca upgrades do jogador.
+ */
 public class UpgradeDAO {
 
+    /**
+     * Salva um upgrade novo no banco.
+     */
     public void salvar(Upgrade upgrade) {
         String sql = "INSERT INTO upgrade (jogador_id, dicas_extras, tempo_bonus, pontos_bonus) VALUES (?, ?, ?, ?)";
         try (Connection conn = ConexaoBanco.getConexao();
@@ -21,6 +27,10 @@ public class UpgradeDAO {
         }
     }
 
+    /**
+     * Busca o upgrade de um jogador pelo ID.
+     * Retorna um upgrade padrão se não encontrar.
+     */
     public Upgrade buscarPorJogador(int jogadorId) {
         String sql = "SELECT * FROM upgrade WHERE jogador_id = ? ORDER BY id DESC LIMIT 1";
         try (Connection conn = ConexaoBanco.getConexao();
@@ -44,6 +54,9 @@ public class UpgradeDAO {
         return new Upgrade(jogadorId);
     }
 
+    /**
+     * Atualiza o upgrade existente.
+     */
     public void atualizar(Upgrade upgrade) {
         String sql = "UPDATE upgrade SET dicas_extras = ?, tempo_bonus = ?, pontos_bonus = ? WHERE id = ?";
         try (Connection conn = ConexaoBanco.getConexao();

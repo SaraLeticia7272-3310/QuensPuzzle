@@ -5,28 +5,31 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.tlp2.queenspuzzle.controller.RankingController"
-      alignment="CENTER" spacing="20"
-      style="-fx-background-color: #1a1a2e; -fx-padding: 40;">
+      alignment="CENTER" spacing="16"
+      style="-fx-background-color: #f5f0ff; -fx-padding: 36;">
 
-    <Label text="🏆 RANKING"
-           style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #f0d060;"/>
+    <Label text="🏆 Ranking"
+           style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #7b5ea7;"/>
+
+    <Label text="Top 10 melhores jogadores"
+           style="-fx-text-fill: #9b80c4; -fx-font-size: 13;"/>
 
     <TextArea fx:id="areaRanking"
-              editable="false" prefWidth="420" prefHeight="280"
-              style="-fx-font-family: monospace; -fx-font-size: 13; -fx-background-color: #2d2d44; -fx-text-fill: white; -fx-border-color: #444;"/>
+              editable="false" prefWidth="420" prefHeight="260"
+              style="-fx-font-family: monospace; -fx-font-size: 13; -fx-background-color: white; -fx-text-fill: #4a3060; -fx-border-color: #d8b7fe; -fx-border-width: 1.5; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 12;"/>
 
-    <Label fx:id="labelMensagem" text="" style="-fx-text-fill: #2ecc71; -fx-font-size: 12;"/>
+    <Label fx:id="labelMensagem" text="" style="-fx-text-fill: #7b5ea7; -fx-font-size: 12;"/>
 
-    <HBox spacing="15" alignment="CENTER">
-        <Button text="Exportar CSV" onAction="#aoClicarExportarCSV"
-                prefWidth="140" prefHeight="38"
-                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
-        <Button text="Exportar TXT" onAction="#aoClicarExportarTXT"
-                prefWidth="140" prefHeight="38"
-                style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
-        <Button text="◀ Voltar" onAction="#aoClicarVoltar"
-                prefWidth="100" prefHeight="38"
-                style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-cursor: hand;"/>
+    <HBox spacing="12" alignment="CENTER">
+        <Button text="📄 Exportar CSV" onAction="#aoClicarExportarCSV"
+                prefWidth="145" prefHeight="38"
+                style="-fx-background-color: #bbc5ff; -fx-text-fill: #3a2080; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #8b9fe8; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand;"/>
+        <Button text="📋 Exportar TXT" onAction="#aoClicarExportarTXT"
+                prefWidth="145" prefHeight="38"
+                style="-fx-background-color: #d8b7fe; -fx-text-fill: #4a2080; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #b088e8; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand;"/>
+        <Button text="↩ Voltar" onAction="#aoClicarVoltar"
+                prefWidth="90" prefHeight="38"
+                style="-fx-background-color: #f0e8ff; -fx-text-fill: #9b80c4; -fx-background-radius: 10; -fx-border-color: #d8b7fe; -fx-border-radius: 10; -fx-border-width: 1; -fx-cursor: hand;"/>
     </HBox>
 
 </VBox>

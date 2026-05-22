@@ -6,10 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller do Inventário.
+ * Abre em um Stage separado (segunda janela).
+ */
 public class InventarioController implements Initializable {
 
     @FXML private TextArea areaItens;
@@ -37,6 +42,9 @@ public class InventarioController implements Initializable {
         areaItens.setText(sb.toString());
     }
 
+    /**
+     * Fecha esta janela.
+     */
     @FXML
     private void aoClicarFechar() {
         Stage stage = (Stage) areaItens.getScene().getWindow();

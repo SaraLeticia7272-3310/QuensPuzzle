@@ -2,48 +2,50 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.tlp2.queenspuzzle.controller.MenuPrincipalController"
-      alignment="CENTER" spacing="20"
-      style="-fx-background-color: #1a1a2e; -fx-padding: 40;">
+      alignment="CENTER" spacing="18"
+      style="-fx-background-color: #f5f0ff; -fx-padding: 40;">
 
-    <!-- Título -->
-    <Label text="♛ Queens Puzzle ♛"
-           style="-fx-font-size: 36; -fx-font-weight: bold; -fx-text-fill: #f0d060;"/>
+    <!-- Título decorativo -->
+    <VBox alignment="CENTER" spacing="4">
+        <Label text="♛"
+               style="-fx-font-size: 52; -fx-text-fill: #d8b7fe;"/>
+        <Label text="Queens Puzzle"
+               style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #7b5ea7;"/>
+        <Label text="Posicione as rainhas com sabedoria"
+               style="-fx-font-size: 13; -fx-text-fill: #9b80c4;"/>
+    </VBox>
 
-    <Label text="Posicione N rainhas sem que se ataquem"
-           style="-fx-font-size: 14; -fx-text-fill: #aaaaaa;"/>
-
-    <Separator style="-fx-background-color: #444466;" prefWidth="300"/>
-
-    <!-- Campo de nome -->
-    <VBox alignment="CENTER" spacing="8">
-        <Label text="Digite seu nome:" style="-fx-text-fill: white; -fx-font-size: 14;"/>
-        <TextField fx:id="campoNome" promptText="Seu nome aqui..."
-                   maxWidth="250"
-                   style="-fx-font-size: 14; -fx-background-color: #2d2d44; -fx-text-fill: white; -fx-prompt-text-fill: #888; -fx-padding: 8;"/>
-        <Label fx:id="labelMensagem" text="" style="-fx-text-fill: #e74c3c; -fx-font-size: 12;"/>
+    <!-- Card do campo de nome -->
+    <VBox alignment="CENTER" spacing="10"
+          style="-fx-background-color: white; -fx-background-radius: 16; -fx-padding: 20 30 20 30; -fx-effect: dropshadow(gaussian, #d8b7fe, 8, 0.2, 0, 2);">
+        <Label text="Qual é o seu nome?" style="-fx-text-fill: #7b5ea7; -fx-font-size: 14; -fx-font-weight: bold;"/>
+        <TextField fx:id="campoNome" promptText="Digite aqui..."
+                   maxWidth="260"
+                   style="-fx-font-size: 14; -fx-background-color: #f5f0ff; -fx-text-fill: #4a3060; -fx-prompt-text-fill: #bba0dd; -fx-padding: 10 14; -fx-background-radius: 10; -fx-border-color: #d8b7fe; -fx-border-radius: 10; -fx-border-width: 1.5;"/>
+        <Label fx:id="labelMensagem" text="" style="-fx-text-fill: #c050b0; -fx-font-size: 12;"/>
     </VBox>
 
     <!-- Botões do menu -->
-    <VBox alignment="CENTER" spacing="12">
-        <Button text="▶  JOGAR" onAction="#aoClicarJogar"
-                prefWidth="220" prefHeight="45"
-                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;"/>
+    <VBox alignment="CENTER" spacing="10">
+        <Button text="▶   JOGAR" onAction="#aoClicarJogar"
+                prefWidth="240" prefHeight="46"
+                style="-fx-background-color: #bbc5ff; -fx-text-fill: #3a2080; -fx-font-size: 16; -fx-font-weight: bold; -fx-background-radius: 12; -fx-cursor: hand; -fx-border-color: #8b9fe8; -fx-border-radius: 12; -fx-border-width: 1.5;"/>
 
-        <Button text="🏆  RANKING" onAction="#aoClicarRanking"
-                prefWidth="220" prefHeight="40"
-                style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-size: 14; -fx-cursor: hand;"/>
+        <Button text="🏆   RANKING" onAction="#aoClicarRanking"
+                prefWidth="240" prefHeight="40"
+                style="-fx-background-color: #d8b7fe; -fx-text-fill: #4a2080; -fx-font-size: 14; -fx-background-radius: 12; -fx-cursor: hand; -fx-border-color: #b088e8; -fx-border-radius: 12; -fx-border-width: 1.5;"/>
 
-        <Button text="ℹ  CRÉDITOS" onAction="#aoClicarCreditos"
-                prefWidth="220" prefHeight="40"
-                style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-size: 14; -fx-cursor: hand;"/>
+        <Button text="✨   CRÉDITOS" onAction="#aoClicarCreditos"
+                prefWidth="240" prefHeight="40"
+                style="-fx-background-color: #fcc5fe; -fx-text-fill: #7a1080; -fx-font-size: 14; -fx-background-radius: 12; -fx-cursor: hand; -fx-border-color: #e099e8; -fx-border-radius: 12; -fx-border-width: 1.5;"/>
 
-        <Button text="✕  ENCERRAR" onAction="#aoClicarEncerrar"
-                prefWidth="220" prefHeight="40"
-                style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-size: 14; -fx-cursor: hand;"/>
+        <Button text="✕   ENCERRAR" onAction="#aoClicarEncerrar"
+                prefWidth="240" prefHeight="38"
+                style="-fx-background-color: #f0e8ff; -fx-text-fill: #9b80c4; -fx-font-size: 13; -fx-background-radius: 12; -fx-cursor: hand; -fx-border-color: #d8b7fe; -fx-border-radius: 12; -fx-border-width: 1;"/>
     </VBox>
 
 </VBox>

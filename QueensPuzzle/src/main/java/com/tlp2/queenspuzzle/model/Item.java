@@ -1,5 +1,8 @@
 package com.tlp2.queenspuzzle.model;
 
+/**
+ * Representa um item que o jogador pode ter no inventário.
+ */
 public class Item {
 
     private String nome;
@@ -12,21 +15,10 @@ public class Item {
         this.quantidade = quantidade;
     }
 
-    public String getNome() { 
-        return nome; 
-    }
-    
-    public String getDescricao() { 
-        return descricao; 
-    }
-    
-    public int getQuantidade() { 
-        return quantidade; 
-    }
-    
-    public void setQuantidade(int quantidade) { 
-        this.quantidade = quantidade; 
-    }
+    public String getNome() { return nome; }
+    public String getDescricao() { return descricao; }
+    public int getQuantidade() { return quantidade; }
+    public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
 
     @Override
     public String toString() {
