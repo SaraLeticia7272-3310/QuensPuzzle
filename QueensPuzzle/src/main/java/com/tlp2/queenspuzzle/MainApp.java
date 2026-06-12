@@ -16,7 +16,7 @@ public class MainApp extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("/com/tlp2/queenspuzzle/view/MenuPrincipal.fxml"));
 
-        Scene scene = new Scene(root, 1280, 720);
+        Scene scene = new Scene(root, 720, 720);
         stage.setTitle("Queens Puzzle");
         stage.setScene(scene);
         stage.setResizable(false);
