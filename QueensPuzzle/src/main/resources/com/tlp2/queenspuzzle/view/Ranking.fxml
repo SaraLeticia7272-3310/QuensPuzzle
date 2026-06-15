@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="16" style="-fx-background-color: #f5f0ff; -fx-padding: 36;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/26" fx:controller="com.tlp2.queenspuzzle.controller.RankingController">
+<VBox alignment="CENTER" spacing="16" style="-fx-background-color: #f5f0ff; -fx-padding: 36;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tlp2.queenspuzzle.controller.RankingController">
 
     <Label style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #7b5ea7;" text="🏆 Ranking" />
 
-    <Label style="-fx-text-fill: #9b80c4; -fx-font-size: 13;" text="Top 10 melhores jogadores" />
-   <Label fx:id="labelRanking" alignment="CENTER" contentDisplay="CENTER" prefHeight="214.0" prefWidth="402.0" style="-fx-font-family: monospace; -fx-font-size: 14; -fx-background-color: white; -fx-text-fill: #4a3060; -fx-border-color: #d8b7fe; -fx-border-width: 1.5; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 12;" textAlignment="JUSTIFY" textFill="#4a3060" />
+    <Label style="-fx-text-fill: #9b80c4; -fx-font-size: 13; -fx-font-weight: bold;" text="Top 10 melhores jogadores" />
+   <TableView fx:id="tabelaRanking" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="505.0" style="-fx-background-color: transparent; -fx-border-color: #B794F4; -fx-text-background-color: #7C5AB8; -fx-font-weight: bold;">
+     <columns>
+         <TableColumn fx:id="colPosicao" prefWidth="113.0" style="-fx-font-size: 14; -fx-border-color: #B794F4; -fx-alignment: center;" text="Posição" />
+         <TableColumn fx:id="colNome" prefWidth="160.0" style="-fx-font-size: 14; -fx-border-color: #B794F4; -fx-alignment: center;" text="Nome" />
+       <TableColumn fx:id="colPontos" prefWidth="113.0" style="-fx-font-size: 14; -fx-border-color: #B794F4; -fx-alignment: center;" text="Pontos" />
+       <TableColumn fx:id="colNivel" prefWidth="113.0" style="-fx-font-size: 14; -fx-border-color: #B794F4; -fx-alignment: center;" text="Nível" />
+     </columns>
+   </TableView>
 
-    <HBox alignment="CENTER" spacing="12">
+    <HBox alignment="CENTER" spacing="12.0">
         <Button onAction="#aoClicarExportarCSV" prefHeight="38" prefWidth="145" style="-fx-background-color: #bbc5ff; -fx-text-fill: #3a2080; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #8b9fe8; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand;" text="📄 Exportar CSV" />
         <Button onAction="#aoClicarExportarTXT" prefHeight="38" prefWidth="145" style="-fx-background-color: #d8b7fe; -fx-text-fill: #4a2080; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #b088e8; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand;" text="📄 Exportar TXT" />
         <Button onAction="#aoClicarVoltar" prefHeight="38" prefWidth="90" style="-fx-background-color: #f0e8ff; -fx-text-fill: #7b5ea7; -fx-background-radius: 10; -fx-border-color: #d8b7fe; -fx-border-radius: 10; -fx-border-width: 1; -fx-cursor: hand; -fx-font-weight: bold;" text="⬅ Voltar" />
+      <VBox.margin>
+         <Insets top="40.0" />
+      </VBox.margin>
     </HBox>
 
 </VBox>

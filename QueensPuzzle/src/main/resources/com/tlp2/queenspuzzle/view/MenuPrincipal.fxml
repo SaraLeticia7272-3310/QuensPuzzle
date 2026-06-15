@@ -10,22 +10,22 @@
 
     <!-- Título decorativo -->
     <VBox alignment="CENTER" spacing="4">
-        <Label style="-fx-font-size: 52; -fx-text-fill: #d8b7fe;" text="👑" />
+        <Label style="-fx-font-size: 52; -fx-text-fill: #7b5ea7;" text="👑" />
         <Label style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #7b5ea7;" text="Queens Puzzle" />
-        <Label style="-fx-font-size: 13; -fx-text-fill: #9b80c4;" text="Posicione as rainhas com sabedoria" />
+        <Label style="-fx-font-size: 13; -fx-text-fill: #9b80c4; -fx-font-weight: bold;" text="Posicione as rainhas com sabedoria" />
     </VBox>
      <Label style="-fx-text-fill: #7b5ea7; -fx-font-size: 14; -fx-font-weight: bold;" text="Qual é o seu nome?" />
      <TextField fx:id="campoNome" maxWidth="240.0" prefHeight="42.0" prefWidth="210.0" promptText="Digite aqui..." style="-fx-font-size: 14; -fx-background-color: #f5f0ff; -fx-text-fill: #4a3060; -fx-prompt-text-fill: #bba0dd; -fx-padding: 10 14; -fx-background-radius: 10; -fx-border-color: #d8b7fe; -fx-border-radius: 10; -fx-border-width: 1.5;" />
 
     <!-- Botões do menu -->
     <VBox alignment="CENTER" spacing="10">
-        <Button onAction="#aoClicarJogar" prefHeight="46" prefWidth="240" style="-fx-background-color: #bbc5ff; -fx-text-fill: #3a2080; -fx-font-size: 16; -fx-background-radius: 12; -fx-cursor: hand; -fx-border-color: #8b9fe8; -fx-border-radius: 12; -fx-border-width: 1.5;" text="⟫   JOGAR" />
+        <Button onAction="#aoClicarJogar" prefHeight="46" prefWidth="240" style="-fx-background-color: #bbc5ff; -fx-text-fill: #3a2080; -fx-font-size: 16; -fx-background-radius: 12; -fx-cursor: hand; -fx-border-color: #8b9fe8; -fx-border-radius: 12; -fx-border-width: 1.5; -fx-font-weight: bold;" text="⟫   JOGAR" />
 
-        <Button onAction="#aoClicarRanking" prefHeight="40" prefWidth="240" style="-fx-background-color: #d8b7fe; -fx-text-fill: #4a2080; -fx-font-size: 14; -fx-background-radius: 12; -fx-cursor: hand; -fx-border-color: #b088e8; -fx-border-radius: 12; -fx-border-width: 1.5;" text="🏆   RANKING" />
+        <Button onAction="#aoClicarRanking" prefHeight="40" prefWidth="240" style="-fx-background-color: #d8b7fe; -fx-text-fill: #4a2080; -fx-font-size: 14; -fx-background-radius: 12; -fx-cursor: hand; -fx-border-color: #b088e8; -fx-border-radius: 12; -fx-border-width: 1.5; -fx-font-weight: bold;" text="🏆   RANKING" />
 
-        <Button onAction="#aoClicarCreditos" prefHeight="40" prefWidth="240" style="-fx-background-color: #fcc5fe; -fx-text-fill: #7a1080; -fx-font-size: 14; -fx-background-radius: 12; -fx-cursor: hand; -fx-border-color: #e099e8; -fx-border-radius: 12; -fx-border-width: 1.5;" text="📄   CRÉDITOS" />
+        <Button onAction="#aoClicarCreditos" prefHeight="40" prefWidth="240" style="-fx-background-color: #fcc5fe; -fx-text-fill: #7a1080; -fx-font-size: 14; -fx-background-radius: 12; -fx-cursor: hand; -fx-border-color: #e099e8; -fx-border-radius: 12; -fx-border-width: 1.5; -fx-font-weight: bold;" text="📄   CRÉDITOS" />
 
-        <Button onAction="#aoClicarEncerrar" prefHeight="38" prefWidth="240" style="-fx-background-color: #ffffff; -fx-font-size: 13; -fx-background-radius: 12; -fx-cursor: hand; -fx-border-color: #6600ff; -fx-border-radius: 12; -fx-border-width: 1;" text="✕   ENCERRAR" textFill="#6600ff" />
+        <Button onAction="#aoClicarEncerrar" prefHeight="38" prefWidth="240" style="-fx-background-color: #f5f0ff; -fx-font-size: 13; -fx-background-radius: 12; -fx-cursor: hand; -fx-border-color: #6600ff; -fx-border-radius: 12; -fx-border-width: 1; -fx-font-weight: bold;" text="✕   ENCERRAR" textFill="#6600ff" />
     </VBox>
    <opaqueInsets>
       <Insets />
