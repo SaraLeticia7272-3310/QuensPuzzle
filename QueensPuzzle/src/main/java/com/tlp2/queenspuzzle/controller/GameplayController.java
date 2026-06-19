@@ -25,15 +25,32 @@ import java.util.ResourceBundle;
  */
 public class GameplayController implements Initializable {
 
-    @FXML private GridPane gridTabuleiro;
-    @FXML private Label labelNome;
-    @FXML private Label labelNivel;
-    @FXML private Label labelPontos;
-    @FXML private Label labelRainhas;
-    @FXML private Label labelTempo;
-    @FXML private Label labelMensagem;
-    @FXML private Label labelMoedas;
-    @FXML private Button btnDica;
+    @FXML 
+    private GridPane gridTabuleiro;
+    
+    @FXML 
+    private Label labelNome;
+    
+    @FXML 
+    private Label labelNivel;
+    
+    @FXML 
+    private Label labelPontos;
+    
+    @FXML 
+    private Label labelRainhas;
+    
+    @FXML 
+    private Label labelTempo;
+    
+    @FXML 
+    private Label labelMensagem;
+    
+    @FXML 
+    private Label labelMoedas;
+    
+    @FXML 
+    private Button btnDica;
 
     private Tabuleiro tabuleiro;
     private SessaoJogo sessao;
@@ -41,6 +58,10 @@ public class GameplayController implements Initializable {
     private Timeline timer;
     private int dicasUsadas;
     private int maxDicas;
+
+    // Controle de arrastar para marcar X
+    private boolean arrastando = false;
+    private Boolean modoDrag = null; // true = marcando X, false = desmarcando X
 
     // Paleta de cores para as regiões (suave e bonita)
     private static final String[] CORES_REGIAO = {
@@ -71,10 +92,10 @@ public class GameplayController implements Initializable {
         sessao = SessaoJogo.getInstance();
         sessao.iniciarNovaRun();
 
-        // Nível determina tamanho do tabuleiro
-        // Mapeia nível 4→5x5, 5→6x6, etc. (mínimo 5 pois 4x4 não é solucionável com regiões)
-        int nivelSalvo = sessao.getJogadorAtual().getNivelMaximo();
-        int tamanho = Math.max(5, Math.min(nivelSalvo, 8));
+        // Usa nivelAtual da sessão (setado pelo UpgradesController ao jogar novamente)
+        // Na primeira vez (vindo do menu), nivelAtual é 4 → forçamos mínimo 5
+        int nivelSessao = sessao.getNivelAtual();
+        int tamanho = Math.max(5, Math.min(nivelSessao, 8));
         sessao.setNivelAtual(tamanho);
 
         tabuleiro = new Tabuleiro(tamanho);
@@ -102,7 +123,50 @@ public class GameplayController implements Initializable {
                 final int col = j;
 
                 StackPane celula = criarCelula(linha, col, tamanho, n);
-                celula.setOnMouseClicked(e -> aoClicarCelula(linha, col));
+
+                // Clique simples / duplo
+                celula.setOnMouseClicked(e -> {
+                    if (!arrastando) {
+                        if (e.getClickCount() == 2) {
+                            aoDuploCliqueCelula(linha, col);
+                        } else {
+                            aoCliqueSimplesCelula(linha, col);
+                        }
+                    }
+                    arrastando = false;
+                });
+
+                // Início do arrastar — define o modo (marcar ou desmarcar X)
+                celula.setOnMousePressed(e -> {
+                    arrastando = false;
+                    // Determina o modo baseado no estado atual da célula
+                    if (!tabuleiro.temRainha(linha, col)) {
+                        modoDrag = !tabuleiro.temMarcacao(linha, col); // true = vai marcar, false = vai desmarcar
+                    } else {
+                        modoDrag = null; // célula com rainha: sem drag
+                    }
+                });
+
+                // Ao arrastar sobre a célula — aplica X
+                celula.setOnMouseDragEntered(e -> {
+                    arrastando = true;
+                    if (modoDrag != null && !tabuleiro.temRainha(linha, col)) {
+                        boolean temMarcacao = tabuleiro.temMarcacao(linha, col);
+                        if (modoDrag && !temMarcacao) {
+                            tabuleiro.alternarMarcacao(linha, col);
+                            desenharTabuleiro();
+                        } else if (!modoDrag && temMarcacao) {
+                            tabuleiro.alternarMarcacao(linha, col);
+                            desenharTabuleiro();
+                        }
+                    }
+                });
+
+                // Habilita o drag source nesta célula
+                celula.setOnDragDetected(e -> {
+                    celula.startFullDrag();
+                    arrastando = true;
+                });
                 gridTabuleiro.add(celula, j, i);
             }
         }
@@ -163,6 +227,20 @@ public class GameplayController implements Initializable {
             celula.getChildren().add(l);
             StackPane.setAlignment(l, javafx.geometry.Pos.TOP_LEFT);
         }
+        
+        // Marcação X
+        if (tabuleiro.temMarcacao(linha, col)) {
+
+            Text x = new Text("❌");
+
+            double fontSize = tam * 0.42;
+
+            x.setStyle(
+                "-fx-font-size: " + fontSize + ";"
+            );
+
+            celula.getChildren().add(x);
+        }
 
         // Se tem rainha, desenha coroa (símbolo unicode bonito)
         if (tabuleiro.temRainha(linha, col)) {
@@ -176,7 +254,7 @@ public class GameplayController implements Initializable {
             circulo.setStrokeWidth(1.5);
 
             // Coroa
-            Text coroa = new Text("♛");
+            Text coroa = new Text("👑");
             double fontSize = tam * 0.48;
             coroa.setStyle("-fx-font-size: " + fontSize + ";");
             coroa.setFill(conflito ? Color.web("#ffffff") : Color.web("#c8860a"));
@@ -192,27 +270,87 @@ public class GameplayController implements Initializable {
         return celula;
     }
 
-    private void aoClicarCelula(int linha, int col) {
-        tabuleiro.alternarRainha(linha, col);
+    private void aoCliqueSimplesCelula(int linha, int col) {
+
+        // Rainha -> remove
+        if (tabuleiro.temRainha(linha, col)) {
+
+            tabuleiro.alternarRainha(linha, col);
+
+        } else {
+
+            // vazio <-> ❌
+            tabuleiro.alternarMarcacao(linha, col);
+        }
+
+        desenharTabuleiro();
+        atualizarInfos();
+    }
+    
+    private void aoDuploCliqueCelula(int linha, int col) {
+        // já existe rainha -> remove
+        if (tabuleiro.temRainha(linha, col)) {
+
+            tabuleiro.alternarRainha(linha, col);
+
+        } else {
+
+            // remove ❌ caso exista
+            if (tabuleiro.temMarcacao(linha, col)) {
+                tabuleiro.alternarMarcacao(linha, col);
+            }
+
+            // coloca 👑
+            tabuleiro.alternarRainha(linha, col);
+        }
+
         desenharTabuleiro();
         atualizarInfos();
 
         if (tabuleiro.estaSolucionado()) {
+
             timer.stop();
+
             int pontos = calcularPontos();
+
             sessao.adicionarPontos(pontos);
             sessao.adicionarMoedas(pontos / 10);
-            sessao.adicionarItem(new Item("Coroa Real",
-                    "Completou nível " + tabuleiro.getTamanho() + "x" + tabuleiro.getTamanho(), 1));
 
-            labelMensagem.setText("✓ Perfeito! +" + pontos + " pontos!");
-            labelMensagem.setStyle("-fx-text-fill: #27ae60; -fx-font-weight: bold; -fx-font-size: 15;");
+            sessao.adicionarItem(
+                    new Item(
+                            "Coroa Real",
+                            "Completou nível "
+                            + tabuleiro.getTamanho()
+                            + "x"
+                            + tabuleiro.getTamanho(),
+                            1
+                    )
+            );
+
+            labelMensagem.setText(
+                    "✓ Perfeito! +" + pontos + " pontos!"
+            );
+
+            labelMensagem.setStyle(
+                    "-fx-text-fill: #27ae60;"
+                    + "-fx-font-weight: bold;"
+                    + "-fx-font-size: 15;"
+            );
+
             atualizarInfos();
 
-            Timeline espera = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
-                salvarPartida();
-                MainApp.trocarTela("/view/Upgrades.fxml");
-            }));
+            Timeline espera = new Timeline(
+                    new KeyFrame(
+                            Duration.seconds(2),
+                            e -> {
+                                salvarPartida();
+                                MainApp.trocarTela(
+                                        "/com/tlp2/queenspuzzle/view/Upgrades.fxml"
+                                );
+                            }
+                    )
+            );
+
             espera.play();
         }
     }
@@ -227,7 +365,7 @@ public class GameplayController implements Initializable {
     private void iniciarTimer() {
         timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             tempoRestante--;
-            labelTempo.setText("⏱ " + tempoRestante + "s");
+            labelTempo.setText(tempoRestante + "s");
 
             if (tempoRestante <= 15) {
                 labelTempo.setStyle("-fx-text-fill: #e74c3c; -fx-font-weight: bold;");
@@ -300,13 +438,50 @@ public class GameplayController implements Initializable {
             javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
                     getClass().getResource("/com/tlp2/queenspuzzle/view/Inventario.fxml"));
             javafx.scene.Parent root = loader.load();
+
+            // Conecta o callback: quando o jogador usar um item, aplica o efeito aqui
+            InventarioController invCtrl = loader.getController();
+            invCtrl.setOnItemUsado(item -> aplicarEfeitoItem(item));
+
             javafx.stage.Stage stageInv = new javafx.stage.Stage();
             stageInv.setTitle("Inventário");
-            stageInv.setScene(new javafx.scene.Scene(root, 400, 350));
+            stageInv.setScene(new javafx.scene.Scene(root, 420, 400));
             stageInv.initOwner(MainApp.getStagePrincipal());
             stageInv.show();
         } catch (Exception e) {
             System.out.println("Erro ao abrir inventário: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Aplica o efeito do item usado no inventário durante o jogo.
+     */
+    private void aplicarEfeitoItem(Item item) {
+        switch (item.getTipo()) {
+            case POCAO_TEMPO:
+                tempoRestante += 30;
+                labelTempo.setText(tempoRestante + "s");
+                // Remove o estilo de urgência se o tempo aumentou
+                if (tempoRestante > 15) {
+                    labelTempo.setStyle("");
+                }
+                labelMensagem.setText("🕛 +30 segundos!");
+                labelMensagem.setStyle("-fx-text-fill: #27ae60; -fx-font-weight: bold;");
+                break;
+            case CHAVE_DICA:
+                maxDicas++;
+                atualizarInfos();
+                labelMensagem.setText("🗝 +1 dica disponível!");
+                labelMensagem.setStyle("-fx-text-fill: #27ae60; -fx-font-weight: bold;");
+                break;
+            case AMULETO_PONTOS:
+                sessao.adicionarPontos(100);
+                atualizarInfos();
+                labelMensagem.setText("💎 +100 pontos!");
+                labelMensagem.setStyle("-fx-text-fill: #27ae60; -fx-font-weight: bold;");
+                break;
+            default:
+                break;
         }
     }
 

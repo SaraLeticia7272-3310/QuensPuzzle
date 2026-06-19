@@ -33,7 +33,8 @@ public class BossController implements Initializable {
     private SessaoJogo sessao;
     private int tempoRestante;
     private Timeline timer;
-
+    private boolean arrastandoMarcacao = false;
+    
     // Mesma paleta suave
     private static final String[] CORES_REGIAO = {
         "#c9e4ff", "#bbc5ff", "#d8b7fe", "#fcc5fe",
@@ -65,7 +66,28 @@ public class BossController implements Initializable {
                 final int linha = i;
                 final int col = j;
                 StackPane celula = criarCelula(linha, col, tam, n);
-                celula.setOnMouseClicked(e -> aoClicarCelula(linha, col));
+                celula.setOnMousePressed(e -> {
+    arrastandoMarcacao = true;
+
+    if (!tabuleiro.temRainha(linha, col)) {
+        tabuleiro.colocarMarcacao(linha, col);
+        desenharTabuleiro();
+    }
+});
+
+celula.setOnMouseEntered(e -> {
+    if (arrastandoMarcacao &&
+        !tabuleiro.temRainha(linha, col) &&
+        !tabuleiro.temMarcacao(linha, col)) {
+
+        tabuleiro.colocarMarcacao(linha, col);
+        desenharTabuleiro();
+    }
+});
+
+celula.setOnMouseReleased(e -> {
+    arrastandoMarcacao = false;
+});
                 gridTabuleiro.add(celula, j, i);
             }
         }
@@ -87,6 +109,16 @@ public class BossController implements Initializable {
         // Bordas de região
         adicionarBordas(celula, linha, col, tam, n, regiao, corBorda);
 
+        if (tabuleiro.temMarcacao(linha, col)) {
+            Text x = new Text("❌");
+
+            x.setStyle(
+                    "-fx-font-size: " + (tam * 0.40) + ";"
+            );
+
+            celula.getChildren().add(x);
+        }
+        
         if (tabuleiro.temRainha(linha, col)) {
             boolean conflito = tabuleiro.estaEmConflito(linha, col);
             Circle circulo = new Circle(tam * 0.38);
@@ -121,26 +153,80 @@ public class BossController implements Initializable {
         }
     }
 
-    private void aoClicarCelula(int linha, int col) {
-        tabuleiro.alternarRainha(linha, col);
+    private void aoCliqueSimplesCelula(int linha, int col) {
+
+        if (tabuleiro.temRainha(linha, col)) {
+
+            tabuleiro.alternarRainha(linha, col);
+
+        } else {
+
+            tabuleiro.alternarMarcacao(linha, col);
+        }
+
+        desenharTabuleiro();
+    }
+    
+    private void aoDuploCliqueCelula(int linha, int col) {
+
+        if (tabuleiro.temRainha(linha, col)) {
+
+            tabuleiro.alternarRainha(linha, col);
+
+        } else {
+
+            if (tabuleiro.temMarcacao(linha, col)) {
+                tabuleiro.alternarMarcacao(linha, col);
+            }
+
+            tabuleiro.alternarRainha(linha, col);
+        }
+
         desenharTabuleiro();
 
         if (tabuleiro.estaSolucionado()) {
+
             timer.stop();
-            int pontos = 800 + (tempoRestante * 10) + sessao.getUpgradeAtual().getPontosBonus();
+
+            int pontos = 800
+                    + (tempoRestante * 10)
+                    + sessao.getUpgradeAtual().getPontosBonus();
+
             sessao.adicionarPontos(pontos);
 
-            labelMensagem.setText("BOSS DERROTADO! +" + pontos + " pontos!");
-            labelMensagem.setStyle("-fx-text-fill: #c8860a; -fx-font-weight: bold;");
+            labelMensagem.setText(
+                    "BOSS DERROTADO! +" + pontos + " pontos!"
+            );
+
+            labelMensagem.setStyle(
+                    "-fx-text-fill: #c8860a; -fx-font-weight: bold;"
+            );
 
             Jogador j = sessao.getJogadorAtual();
-            j.setPontuacaoTotal(j.getPontuacaoTotal() + pontos);
-            j.setNivelMaximo(Math.min(j.getNivelMaximo() + 1, 8));
-            new JogadorDAO().atualizar(j);
-            new PartidaDAO().salvar(new Partida(j.getId(), pontos, 8));
 
-            Timeline espera = new Timeline(new KeyFrame(Duration.seconds(2), e ->
-                    MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Upgrades.fxml")));
+            j.setPontuacaoTotal(
+                    j.getPontuacaoTotal() + pontos
+            );
+
+            j.setNivelMaximo(
+                    Math.min(j.getNivelMaximo() + 1, 8)
+            );
+
+            new JogadorDAO().atualizar(j);
+
+            new PartidaDAO().salvar(
+                    new Partida(j.getId(), pontos, 8)
+            );
+
+            Timeline espera = new Timeline(
+                    new KeyFrame(
+                            Duration.seconds(2),
+                            e -> MainApp.trocarTela(
+                                    "/com/tlp2/queenspuzzle/view/Upgrades.fxml"
+                            )
+                    )
+            );
+
             espera.play();
         }
     }

@@ -35,7 +35,8 @@ public class UpgradesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         sessao = SessaoJogo.getInstance();
-        pontosDisponiveis = sessao.getPontuacaoRodada();
+        // Usa pontuacaoAcumulada para que os pontos não sumam ao navegar entre telas
+        pontosDisponiveis = sessao.getPontuacaoAcumulada();
         atualizarLabels();
     }
 
@@ -49,8 +50,12 @@ public class UpgradesController implements Initializable {
         labelTempo.setText("Tempo bônus: +" + u.getTempoBonus() + "s (custo: " + CUSTO_TEMPO + " pts)");
         labelPontosBonus.setText("Bônus de pontos: +" + u.getPontosBonus() + " (custo: " + CUSTO_PONTOS + " pts)");
 
-        int proximoNivel = j.getNivelMaximo();
-        labelProximoNivel.setText("Próxima run: tabuleiro " + proximoNivel + "x" + proximoNivel);
+        // Mantém pontuacaoAcumulada sincronizada com pontosDisponiveis
+        sessao.setPontuacaoAcumulada(pontosDisponiveis);
+
+        int nivelAtual = sessao.getNivelAtual();
+        int proximoNivel = (nivelAtual >= 8) ? 5 : nivelAtual + 1;
+        labelProximoNivel.setText("Próxima run: tabuleiro " + proximoNivel + "×" + proximoNivel);
     }
 
     /**
@@ -115,15 +120,19 @@ public class UpgradesController implements Initializable {
     }
 
     /**
-     * Botão JOGAR NOVAMENTE: inicia nova run no próximo nível.
+     * Botão JOGAR NOVAMENTE: avança para o próximo nível em ciclo (5→6→7→8→5→...).
      */
     @FXML
     private void aoClicarJogarNovamente() {
         Jogador j = sessao.getJogadorAtual();
-        sessao.setNivelAtual(j.getNivelMaximo());
 
-        // Boss desbloqueado a partir do nível 8
-        if (j.getNivelMaximo() >= 8) {
+        // Próximo nível em ciclo: 5→6→7→8→5→...
+        int nivelAtual = sessao.getNivelAtual();
+        int proximoNivel = (nivelAtual >= 8) ? 5 : nivelAtual + 1;
+        sessao.setNivelAtual(proximoNivel);
+
+        // Boss desbloqueado a partir do nível 8 (só quando chega no 8, não nos ciclos subsequentes antes)
+        if (proximoNivel == 8 && j.getNivelMaximo() >= 8) {
             MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Boss.fxml");
         } else {
             MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Gameplay.fxml");

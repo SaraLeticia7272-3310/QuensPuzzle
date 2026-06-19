@@ -17,9 +17,10 @@ public class SessaoJogo {
     private Jogador jogadorAtual;
     private Upgrade upgradeAtual;
     private int pontuacaoRodada;      // pontos da run atual
+    private int pontuacaoAcumulada;   // pontos acumulados na sessão (não zerados ao iniciar run)
     private int nivelAtual;           // tamanho do tabuleiro desta run
     private int moedas;               // moeda interna do jogo
-    private List<Item> inventario;    // itens da run atual
+    private List<Item> inventario;    // itens acumulados de todas as runs da sessão
 
     // Construtor privado (Singleton)
     private SessaoJogo() {
@@ -40,10 +41,21 @@ public class SessaoJogo {
 
     /**
      * Inicia uma nova run.
+     * Reseta apenas a pontuação da rodada; inventário e pontuação acumulada são mantidos.
      */
     public void iniciarNovaRun() {
         this.pontuacaoRodada = 0;
+        // inventário e pontuacaoAcumulada NÃO são resetados aqui
+    }
+
+    /**
+     * Reseta completamente a sessão (ao trocar de jogador).
+     */
+    public void resetarSessao() {
+        this.pontuacaoRodada = 0;
+        this.pontuacaoAcumulada = 0;
         this.inventario = new ArrayList<>();
+        this.moedas = 0;
     }
 
     /**
@@ -62,7 +74,13 @@ public class SessaoJogo {
 
     public int getPontuacaoRodada() { return pontuacaoRodada; }
     public void setPontuacaoRodada(int pontos) { this.pontuacaoRodada = pontos; }
-    public void adicionarPontos(int pontos) { this.pontuacaoRodada += pontos; }
+    public void adicionarPontos(int pontos) {
+        this.pontuacaoRodada += pontos;
+        this.pontuacaoAcumulada += pontos;
+    }
+
+    public int getPontuacaoAcumulada() { return pontuacaoAcumulada; }
+    public void setPontuacaoAcumulada(int pontos) { this.pontuacaoAcumulada = pontos; }
 
     public int getNivelAtual() { return nivelAtual; }
     public void setNivelAtual(int nivel) { this.nivelAtual = nivel; }

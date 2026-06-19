@@ -58,6 +58,7 @@
     <HBox alignment="CENTER" spacing="12">
         <Button onAction="#aoClicarVoltar" prefHeight="38" prefWidth="155" style="-fx-background-color: #bbc5ff; -fx-text-fill: #3a2080; -fx-font-size: 13; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #8b9fe8; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand;" text="⬅ Voltar ao Jogo" />
         <Button onAction="#aoClicarUpgrades" prefHeight="38" prefWidth="130" style="-fx-background-color: #d8b7fe; -fx-text-fill: #4a2080; -fx-background-radius: 10; -fx-border-color: #b088e8; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand; -fx-font-weight: bold;" text="⬆ Upgrades" />
+        <Button onAction="#aoClicarMenu" prefHeight="38" prefWidth="110" style="-fx-background-color: #dbcafa; -fx-text-fill: #6a3dbf; -fx-background-radius: 10; -fx-border-color: #a785e6; -fx-border-radius: 10; -fx-border-width: 1; -fx-cursor: hand; -fx-font-weight: bold;" text="🏠 Menu" />
     </HBox>
 
 </VBox>

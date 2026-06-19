@@ -49,11 +49,33 @@ public class MenuPrincipalController {
 
         // Salva na sessão
         SessaoJogo sessao = SessaoJogo.getInstance();
+
+        // Só inicializa moedas se for um jogador diferente ou sessão nova (sem jogador anterior)
+        boolean mesmJogador = sessao.getJogadorAtual() != null
+                && sessao.getJogadorAtual().getId() == jogador.getId();
+        if (!mesmJogador) {
+            sessao.resetarSessao(); // limpa inventário, moedas e pontuação acumulada
+            sessao.setMoedas(50);   // moedas iniciais apenas para sessão nova ou troca de jogador
+        }
+
         sessao.setJogadorAtual(jogador);
         sessao.setUpgradeAtual(upgrade);
-        sessao.setMoedas(50); // moedas iniciais por sessão
 
         MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Gameplay.fxml");
+    }
+
+    /**
+     * Botão LOJA
+     */
+    @FXML
+    private void aoClicarLoja() {
+        // Verifica se há jogador na sessão antes de ir para a loja
+        SessaoJogo sessao = SessaoJogo.getInstance();
+        if (sessao.getJogadorAtual() == null || sessao.getUpgradeAtual() == null) {
+            labelMensagem.setText("Digite seu nome para acessar a loja!");
+            return;
+        }
+        MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Loja.fxml");
     }
 
     /**

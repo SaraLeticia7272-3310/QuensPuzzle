@@ -219,9 +219,12 @@ public class Tabuleiro {
      * Limpa o tabuleiro.
      */
     public void limpar() {
-        for (int i = 0; i < tamanho; i++)
-            for (int j = 0; j < tamanho; j++)
+        for (int i = 0; i < tamanho; i++) {
+            for (int j = 0; j < tamanho; j++) {
                 rainhas[i][j] = false;
+                marcacoes[i][j] = false;
+            }
+        }
     }
 
     /**
