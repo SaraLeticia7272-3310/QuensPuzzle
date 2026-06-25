@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ *
+ * @author saral
+ */
+
 public class ConexaoBanco {
     private static final String URL = "jdbc:postgresql://localhost:5432/queens_puzzle";
     private static final String USUARIO = "postgres";

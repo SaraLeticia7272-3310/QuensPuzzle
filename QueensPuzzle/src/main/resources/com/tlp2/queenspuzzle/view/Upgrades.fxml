@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="16" style="-fx-background-color: #f5f0ff; -fx-padding: 36;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/26" fx:controller="com.tlp2.queenspuzzle.controller.UpgradesController">
+<VBox alignment="CENTER" spacing="16" style="-fx-background-color: #f5f0ff; -fx-padding: 36;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tlp2.queenspuzzle.controller.UpgradesController">
 
     <Label style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #7b5ea7;" text="⬆ Upgrades Permanentes" />
 
@@ -56,11 +56,11 @@
     <Label fx:id="labelProximoNivel" style="-fx-text-fill: #9b80c4; -fx-font-size: 12;" text="" />
 
     <HBox alignment="CENTER" spacing="12">
-        <Button onAction="#aoClicarJogarNovamente" prefHeight="42" prefWidth="200" style="-fx-background-color: #bbc5ff; -fx-text-fill: #3a2080; -fx-font-size: 15; -fx-font-weight: bold; -fx-background-radius: 12; -fx-border-color: #8b9fe8; -fx-border-radius: 12; -fx-border-width: 1.5; -fx-cursor: hand;" text="▶ Jogar Novamente" />
+        <Button onAction="#aoClicarJogarNovamente" prefHeight="42" prefWidth="123.0" style="-fx-background-color: #bbc5ff; -fx-text-fill: #3a2080; -fx-font-size: 15; -fx-font-weight: bold; -fx-background-radius: 12; -fx-border-color: #8b9fe8; -fx-border-radius: 12; -fx-border-width: 1.5; -fx-cursor: hand;" text="Jogar " />
 
         <Button onAction="#aoClicarLoja" prefHeight="42" prefWidth="110" style="-fx-background-color: #fcc5fe; -fx-text-fill: #7a1080; -fx-font-size: 14; -fx-background-radius: 12; -fx-border-color: #e099e8; -fx-border-radius: 12; -fx-border-width: 1.5; -fx-cursor: hand; -fx-font-weight: bold;" text="🛒 Loja" />
 
-        <Button onAction="#aoClicarMenu" prefHeight="42" prefWidth="90" style="-fx-background-color: #dbcafa; -fx-text-fill: #6a3dbf; -fx-background-radius: 12; -fx-border-color: #a785e6; -fx-border-radius: 12; -fx-border-width: 1; -fx-cursor: hand; -fx-font-weight: bold;" text="⬅ Menu" />
+        <Button onAction="#aoClicarMenu" prefHeight="42" prefWidth="90" style="-fx-background-color: #dbcafa; -fx-text-fill: #6a3dbf; -fx-background-radius: 12; -fx-border-color: #a785e6; -fx-border-radius: 12; -fx-border-width: 1; -fx-cursor: hand; -fx-font-weight: bold;" text="Menu" />
     </HBox>
 
 </VBox>

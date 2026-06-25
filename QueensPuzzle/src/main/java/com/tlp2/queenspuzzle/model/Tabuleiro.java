@@ -1,26 +1,16 @@
 package com.tlp2.queenspuzzle.model;
 
 /**
- * Contém a lógica do jogo Queens Puzzle moderno.
  *
- * Regras:
- * - O tabuleiro NxN é dividido em N regiões coloridas.
- * - Cada região deve ter exatamente 1 rainha.
- * - Nenhuma rainha pode estar na mesma linha ou coluna que outra.
- * - Nenhuma rainha pode estar em uma célula ADJACENTE a outra
- *   (incluindo diagonal — distância de 1 casa em qualquer direção).
- *   Ou seja, duas rainhas precisam ter distância > 1 em linha OU coluna.
- *
- * Nota sobre tamanhos válidos:
- * - O puzzle precisa de N regiões num tabuleiro NxN.
- * - Tamanhos recomendados: 5, 6, 7, 8. (4 é muito simples, acima de 8 é lento)
+ * @author saral
  */
+
 public class Tabuleiro {
 
     private int tamanho;
-    private boolean[][] rainhas;    // true = rainha posicionada
-    private boolean[][] marcacoes;  // true = marcado com X pelo jogador
-    private int[][] regioes;        // cada célula tem o índice da sua região (0..N-1)
+    private boolean[][] rainhas;    
+    private boolean[][] marcacoes;  
+    private int[][] regioes;        
 
     public Tabuleiro(int tamanho) {
         this.tamanho = tamanho;
@@ -29,11 +19,6 @@ public class Tabuleiro {
         this.regioes = gerarRegioes(tamanho);
     }
 
-    /**
-     * Gera um mapa de regiões para o tabuleiro.
-     * Cada região é um conjunto de células contíguas.
-     * Usamos layouts pré-definidos para garantir que o puzzle seja solucionável.
-     */
     private int[][] gerarRegioes(int n) {
         int[][] r = new int[n][n];
 
@@ -72,8 +57,7 @@ public class Tabuleiro {
             };
             return layout;
         }
-
-        // n == 8 (padrão do boss e níveis altos)
+        
         int[][] layout = {
             {0, 0, 0, 1, 1, 1, 2, 2},
             {0, 0, 1, 1, 1, 2, 2, 2},
@@ -87,61 +71,37 @@ public class Tabuleiro {
         return layout;
     }
 
-    /**
-     * Coloca ou remove uma rainha na posição (linha, coluna).
-     * Se havia um X marcado, remove o X ao colocar a rainha.
-     */
     public void alternarRainha(int linha, int coluna) {
         rainhas[linha][coluna] = !rainhas[linha][coluna];
         if (rainhas[linha][coluna]) {
-            marcacoes[linha][coluna] = false; // remove X se colocar rainha
+            marcacoes[linha][coluna] = false; 
         }
     }
 
-    /**
-     * Alterna o X de marcação na célula.
-     * Só marca X se não tiver rainha ali.
-     */
     public void alternarMarcacao(int linha, int coluna) {
         if (!rainhas[linha][coluna]) {
             marcacoes[linha][coluna] = !marcacoes[linha][coluna];
         }
     }
 
-    /**
-     * Coloca X na célula (sem alternar — usado pelo arrastar).
-     * Só marca se não tiver rainha.
-     */
     public void colocarMarcacao(int linha, int coluna) {
         if (!rainhas[linha][coluna]) {
             marcacoes[linha][coluna] = true;
         }
     }
 
-    /**
-     * Verifica se a célula está marcada com X.
-     */
     public boolean temMarcacao(int linha, int coluna) {
         return marcacoes[linha][coluna];
     }
 
-    /**
-     * Verifica se tem rainha na posição.
-     */
     public boolean temRainha(int linha, int coluna) {
         return rainhas[linha][coluna];
     }
 
-    /**
-     * Retorna a região da célula (índice de cor).
-     */
     public int getRegiao(int linha, int coluna) {
         return regioes[linha][coluna];
     }
 
-    /**
-     * Conta rainhas no tabuleiro.
-     */
     public int contarRainhas() {
         int total = 0;
         for (int i = 0; i < tamanho; i++)
@@ -150,15 +110,6 @@ public class Tabuleiro {
         return total;
     }
 
-    /**
-     * Verifica se a rainha em (linha, coluna) está em conflito.
-     *
-     * Conflito ocorre se existe outra rainha:
-     * - na mesma linha
-     * - na mesma coluna
-     * - adjacente (distância <= 1 em ambas as direções)
-     * - na mesma região (cada região só pode ter 1 rainha)
-     */
     public boolean estaEmConflito(int linha, int coluna) {
         if (!rainhas[linha][coluna]) return false;
 
@@ -169,25 +120,18 @@ public class Tabuleiro {
                 if (i == linha && j == coluna) continue;
                 if (!rainhas[i][j]) continue;
 
-                // mesma linha
                 if (i == linha) return true;
 
-                // mesma coluna
                 if (j == coluna) return true;
 
-                // adjacente (inclui diagonais — distância máxima 1 em qualquer eixo)
                 if (Math.abs(i - linha) <= 1 && Math.abs(j - coluna) <= 1) return true;
 
-                // mesma região
                 if (regioes[i][j] == regiao) return true;
             }
         }
         return false;
     }
 
-    /**
-     * Verifica se cada região tem exatamente 1 rainha.
-     */
     public boolean cadaRegiaоTemUmaRainha() {
         int[] contagem = new int[tamanho];
         for (int i = 0; i < tamanho; i++)
@@ -200,9 +144,6 @@ public class Tabuleiro {
         return true;
     }
 
-    /**
-     * Verifica se o puzzle está completamente resolvido.
-     */
     public boolean estaSolucionado() {
         if (contarRainhas() != tamanho) return false;
         if (!cadaRegiaоTemUmaRainha()) return false;
@@ -215,9 +156,6 @@ public class Tabuleiro {
         return true;
     }
 
-    /**
-     * Limpa o tabuleiro.
-     */
     public void limpar() {
         for (int i = 0; i < tamanho; i++) {
             for (int j = 0; j < tamanho; j++) {
@@ -227,10 +165,6 @@ public class Tabuleiro {
         }
     }
 
-    /**
-     * Retorna uma dica: posição válida para colocar uma rainha.
-     * Encontra a solução por backtracking e revela uma posição dela.
-     */
     public int[] getDica() {
         boolean[][] solucao = new boolean[tamanho][tamanho];
         if (resolverBacktracking(solucao, new boolean[tamanho], new boolean[tamanho], new boolean[tamanho], 0)) {
@@ -242,12 +176,8 @@ public class Tabuleiro {
         return null;
     }
 
-    /**
-     * Backtracking para encontrar solução (usado pelo getDica).
-     * Coloca uma rainha por região, respeitando todas as regras.
-     */
-    private boolean resolverBacktracking(boolean[][] sol, boolean[] linhaUsada,
-                                         boolean[] colunaUsada, boolean[] regiaoUsada, int regiao) {
+ 
+    private boolean resolverBacktracking(boolean[][] sol, boolean[] linhaUsada, boolean[] colunaUsada, boolean[] regiaoUsada, int regiao) {
         if (regiao == tamanho) return true;
 
         for (int i = 0; i < tamanho; i++) {
@@ -256,7 +186,6 @@ public class Tabuleiro {
                 if (colunaUsada[j]) continue;
                 if (regioes[i][j] != regiao) continue;
 
-                // verifica adjacência com rainhas já colocadas
                 boolean adjacente = false;
                 for (int r = 0; r < tamanho && !adjacente; r++)
                     for (int c = 0; c < tamanho && !adjacente; c++)
@@ -280,5 +209,7 @@ public class Tabuleiro {
         return false;
     }
 
-    public int getTamanho() { return tamanho; }
+    public int getTamanho() { 
+        return tamanho; 
+    }
 }

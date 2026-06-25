@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+
+<VBox alignment="CENTER" prefHeight="592.0" prefWidth="446.0" spacing="15" style="-fx-background-color: #f5f0ff; -fx-padding:20;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tlp2.queenspuzzle.controller.ComoJogarController">
+
+    <Label style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #7b5ea7; -fx-label-padding: 20;" text="❓ COMO JOGAR ❓" />
+
+    <ScrollPane fitToWidth="true" prefHeight="380.0" prefWidth="406.0" style="-fx-background: #f5f0ff; -fx-border-color: #fcc5fe;">
+
+        <VBox alignment="CENTER" spacing="10" style="-fx-padding:10;">
+
+            <Label alignment="CENTER" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Objetivo" textFill="#9b80c4" wrapText="true" />
+
+            <Label style="-fx-font-weight: bold;" text="Coloque exatamente uma rainha em cada região colorida do tabuleiro." textAlignment="CENTER" textFill="#ef82db" wrapText="true" />
+
+            <Separator style="-fx-background-color: #7b5ea7;" />
+
+            <Label style="-fx-font-size: 16; -fx-font-weight: bold;" text="Regras" textFill="#9b80c4" />
+
+            <Label style="-fx-font-weight: bold;" text="• Cada região deve possuir exatamente uma rainha." textFill="#ef82db" wrapText="true" />
+
+            <Label style="-fx-font-weight: bold;" text="• Não pode existir mais de uma rainha na mesma linha." textFill="#ef82db" wrapText="true" />
+
+            <Label style="-fx-font-weight: bold;" text="• Não pode existir mais de uma rainha na mesma coluna." textFill="#ef82db" wrapText="true" />
+
+            <Label style="-fx-font-weight: bold;" text="• Rainhas não podem ficar lado a lado, nem mesmo na diagonal." textFill="#ef82db" wrapText="true" />
+
+            <Separator style="-fx-background-color: #7b5ea7;" />
+
+            <Label style="-fx-font-size: 16; -fx-font-weight: bold;" text="Controles" textFill="#9b80c4" />
+
+            <Label style="-fx-font-weight: bold;" text="• Clique simples → coloca ❌ ou remove um ❌ e uma 👑." textFill="#ef82db" wrapText="true" />
+
+            <Label style="-fx-font-weight: bold;" text="• Clique duplo → coloca uma 👑." textFill="#ef82db" wrapText="true" />
+
+            <Label style="-fx-font-weight: bold;" text="• Clique e arraste → marca várias casas com ❌." textFill="#ef82db" wrapText="true" />
+
+            <Separator style="-fx-background-color: #7b5ea7;" />
+
+            <Label style="-fx-font-size: 16; -fx-font-weight: bold;" text="Loja" textFill="#9b80c4" />
+
+            <Label style="-fx-font-weight: bold;" text="Durante a partida você ganha moedas. Elas podem ser usadas para comprar itens especiais, como poções de tempo, chaves de dica e amuletos." textAlignment="CENTER" textFill="#ef82db" wrapText="true" />
+
+            <Separator style="-fx-background-color: #7b5ea7;" />
+
+            <Label style="-fx-font-size: 16; -fx-font-weight: bold;" text="Upgrades" textFill="#9b80c4" />
+
+            <Label style="-fx-font-weight: bold;" text="Os pontos conquistados podem ser gastos em melhorias permanentes, como tempo extra, dicas adicionais e bônus de pontuação." textAlignment="CENTER" textFill="#ef82db" wrapText="true" />
+
+            <Separator style="-fx-background-color: #7b5ea7;" />
+
+            <Label style="-fx-font-size: 16; -fx-font-weight: bold;" text="Boss" textFill="#9b80c4" />
+
+            <Label style="-fx-font-weight: bold;" text="Ao chegar ao tabuleiro 8x8 você enfrentará o desafio final contra o Boss, com menos tempo disponível." textAlignment="CENTER" textFill="#ef82db" wrapText="true" />
+
+        </VBox>
+
+    </ScrollPane>
+
+          <Button fx:id="btnFechar" onAction="#aoClicarFechar" prefWidth="140" style="-fx-background-color: #d8b7fe; -fx-font-size: 14; -fx-background-radius: 12; -fx-border-color: #b088e8; -fx-border-radius: 12; -fx-border-width: 1.5; -fx-font-weight: bold; -fx-cursor: hand;" text="Fechar" textFill="#4a2080" />
+
+</VBox>

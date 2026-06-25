@@ -12,23 +12,27 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
 /**
- * Controller do Inventário — abre como Stage separado durante o Gameplay.
- * Itens usáveis podem ser clicados para aplicar efeito imediato no jogo.
+ *
+ * @author saral
  */
+
 public class InventarioController implements Initializable {
 
-    @FXML private Label labelTitulo;
-    @FXML private VBox listaItens;
-    @FXML private Label labelMensagem;
+    @FXML 
+    private Label labelTitulo;
+    
+    @FXML 
+    private VBox listaItens;
+    
+    @FXML 
+    private Label labelMensagem;
 
-    // Callback chamado pelo GameplayController para receber o efeito do item usado
     private Consumer<Item> onItemUsado;
 
     public void setOnItemUsado(Consumer<Item> callback) {
@@ -39,8 +43,7 @@ public class InventarioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         SessaoJogo sessao = SessaoJogo.getInstance();
 
-        String nome = sessao.getJogadorAtual() != null
-                ? sessao.getJogadorAtual().getNome() : "Jogador";
+        String nome = sessao.getJogadorAtual() != null ? sessao.getJogadorAtual().getNome() : "Jogador";
         labelTitulo.setText("🎒 Inventário de " + nome);
 
         renderizarItens();
@@ -76,12 +79,7 @@ public class InventarioController implements Initializable {
             "-fx-border-width: 1.5;" +
             "-fx-border-radius: 12;"
         );
-
-        // Emoji do item
-        Label emoji = new Label(item.getEmoji());
-        emoji.setStyle("-fx-font-size: 26;");
-
-        // Info do item
+       
         VBox info = new VBox(2);
         HBox.setHgrow(info, Priority.ALWAYS);
 
@@ -93,9 +91,8 @@ public class InventarioController implements Initializable {
 
         info.getChildren().addAll(nomeLbl, descLbl);
 
-        card.getChildren().addAll(emoji, info);
+        card.getChildren().addAll(info);
 
-      // Botão "Usar" apenas para itens usáveis
         if (item.isUsavel()) {
             Button btnUsar = new Button("Usar");
             btnUsar.setStyle(
@@ -111,7 +108,8 @@ public class InventarioController implements Initializable {
             );
             btnUsar.setOnAction(e -> usarItem(item, nomeLbl));
             card.getChildren().add(btnUsar);
-        } else {
+        } 
+        else {
             Label trofeulbl = new Label("Troféu");
             trofeulbl.setStyle("-fx-text-fill: #c8a000; -fx-font-size: 11; -fx-font-style: italic;");
             card.getChildren().add(trofeulbl);
@@ -158,7 +156,6 @@ public class InventarioController implements Initializable {
         }
         labelMensagem.setStyle("-fx-text-fill: #27ae60; -fx-font-weight: bold;");
 
-        // Atualiza a lista
         renderizarItens();
     }
 

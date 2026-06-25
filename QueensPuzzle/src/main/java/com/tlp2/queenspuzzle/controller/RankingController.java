@@ -13,7 +13,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,6 +20,11 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+/**
+ *
+ * @author saral
+ */
 
 public class RankingController implements Initializable {
 
@@ -46,35 +50,21 @@ public class RankingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        colPosicao.setCellValueFactory(
-                new PropertyValueFactory<>("posicao"));
-
-        colNome.setCellValueFactory(
-                new PropertyValueFactory<>("nome"));
-
-        colPontos.setCellValueFactory(
-                new PropertyValueFactory<>("pontos"));
-
-        colNivel.setCellValueFactory(
-                new PropertyValueFactory<>("nivel"));
-
+        colPosicao.setCellValueFactory(new PropertyValueFactory<>("posicao"));
+        colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colPontos.setCellValueFactory(new PropertyValueFactory<>("pontos"));
+        colNivel.setCellValueFactory(new PropertyValueFactory<>("nivel"));
         carregarRanking();
     }
 
     private void carregarRanking() {
-
         listaRanking = new JogadorDAO().getRanking();
 
-        ObservableList<LinhaRanking> dados =
-                FXCollections.observableArrayList();
+        ObservableList<LinhaRanking> dados = FXCollections.observableArrayList();
 
         for (int i = 0; i < listaRanking.size(); i++) {
-
             Jogador j = listaRanking.get(i);
-
             String posicao;
-
             switch (i) {
                 case 0:
                     posicao = "🥇";
@@ -89,7 +79,7 @@ public class RankingController implements Initializable {
                     posicao = String.valueOf(i + 1);
                     break;
             }
-
+            
             dados.add(new LinhaRanking(
                     posicao,
                     j.getNome(),
@@ -108,23 +98,15 @@ public class RankingController implements Initializable {
         chooser.setTitle("Salvar Ranking CSV");
         chooser.setInitialFileName("ranking_queens.csv");
 
-        chooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("CSV", "*.csv"));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
 
-        File arquivo = chooser.showSaveDialog(
-                MainApp.getStagePrincipal());
+        File arquivo = chooser.showSaveDialog(MainApp.getStagePrincipal());
 
         if (arquivo != null) {
-
-            try (PrintWriter pw =
-                         new PrintWriter(new FileWriter(arquivo))) {
-
+            try (PrintWriter pw = new PrintWriter(new FileWriter(arquivo))) {
                 pw.println("Posicao,Nome,Pontuacao,Nivel");
-
                 for (int i = 0; i < listaRanking.size(); i++) {
-
                     Jogador j = listaRanking.get(i);
-
                     pw.println(
                             (i + 1) + "," +
                             j.getNome() + "," +
@@ -132,10 +114,7 @@ public class RankingController implements Initializable {
                             j.getNivelMaximo()
                     );
                 }
-
-                labelMensagem.setText(
-                        "✓ CSV salvo em: " + arquivo.getName());
-
+                labelMensagem.setText("✓ CSV salvo em: " + arquivo.getName());
             } catch (IOException e) {
                 labelMensagem.setText("Erro ao salvar CSV.");
             }
@@ -149,23 +128,15 @@ public class RankingController implements Initializable {
         chooser.setTitle("Salvar Ranking TXT");
         chooser.setInitialFileName("ranking_queens.txt");
 
-        chooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("TXT", "*.txt"));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT", "*.txt"));
 
-        File arquivo = chooser.showSaveDialog(
-                MainApp.getStagePrincipal());
+        File arquivo = chooser.showSaveDialog(MainApp.getStagePrincipal());
 
         if (arquivo != null) {
-
-            try (PrintWriter pw =
-                         new PrintWriter(new FileWriter(arquivo))) {
-
+            try (PrintWriter pw = new PrintWriter(new FileWriter(arquivo))) {
                 pw.println("RANKING");
-
                 for (int i = 0; i < listaRanking.size(); i++) {
-
                     Jogador j = listaRanking.get(i);
-
                     pw.println(
                             (i + 1) + " - " +
                             j.getNome() + " - " +
@@ -174,10 +145,7 @@ public class RankingController implements Initializable {
                             j.getNivelMaximo()
                     );
                 }
-
-                labelMensagem.setText(
-                        "✓ TXT salvo em: " + arquivo.getName());
-
+                labelMensagem.setText("✓ TXT salvo em: " + arquivo.getName());
             } catch (IOException e) {
                 labelMensagem.setText("Erro ao salvar TXT.");
             }
@@ -186,7 +154,6 @@ public class RankingController implements Initializable {
 
     @FXML
     private void aoClicarVoltar() {
-        MainApp.trocarTela(
-                "/com/tlp2/queenspuzzle/view/MenuPrincipal.fxml");
+        MainApp.trocarTela("/com/tlp2/queenspuzzle/view/MenuPrincipal.fxml");
     }
 }

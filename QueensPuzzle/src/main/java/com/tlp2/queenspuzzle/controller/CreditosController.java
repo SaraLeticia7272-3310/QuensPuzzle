@@ -4,8 +4,10 @@ import com.tlp2.queenspuzzle.MainApp;
 import javafx.fxml.FXML;
 
 /**
- * Controller da tela de Créditos.
+ *
+ * @author saral
  */
+
 public class CreditosController {
 
     @FXML

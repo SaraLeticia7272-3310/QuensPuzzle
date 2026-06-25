@@ -1,17 +1,18 @@
 package com.tlp2.queenspuzzle.model;
 
 /**
- * Representa um item que o jogador pode ter no inventário.
- * Cada item tem um tipo que define o efeito ao ser usado.
+ *
+ * @author saral
  */
+
 public class Item {
 
     public enum Tipo {
-        POCAO_TEMPO,    // +30s no timer
-        CHAVE_DICA,     // +1 dica disponível
-        AMULETO_PONTOS, // +100 pontos imediatos
-        COROA_REAL,     // troféu (não usável)
-        GENERICO        // sem efeito especial
+        POCAO_TEMPO,    
+        CHAVE_DICA,     
+        AMULETO_PONTOS, 
+        COROA_REAL,     
+        GENERICO        
     }
 
     private String nome;
@@ -48,12 +49,25 @@ public class Item {
         return tipo != Tipo.COROA_REAL && tipo != Tipo.GENERICO;
     }
 
-    public String getNome()        { return nome; }
-    public String getDescricao()   { return descricao; }
-    public int    getQuantidade()  { return quantidade; }
-    public Tipo   getTipo()        { return tipo; }
+    public String getNome(){ 
+        return nome; 
+    }
+    
+    public String getDescricao(){ 
+        return descricao; 
+    }
+    
+    public int getQuantidade(){ 
+        return quantidade; 
+    }
+    
+    public Tipo getTipo(){ 
+        return tipo; 
+    }
 
-    public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
+    public void setQuantidade(int quantidade){ 
+        this.quantidade = quantidade; 
+    }
 
     public String getEmoji() {
         switch (tipo) {
@@ -61,7 +75,7 @@ public class Item {
             case CHAVE_DICA:     return "🗝";
             case AMULETO_PONTOS: return "💎";
             case COROA_REAL:     return "👑";
-            default:             return "📦";
+            default:             return "🎁";
         }
     }
 

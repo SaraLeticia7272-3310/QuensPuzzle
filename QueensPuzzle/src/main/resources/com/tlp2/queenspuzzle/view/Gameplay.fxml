@@ -3,9 +3,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 
 <HBox alignment="CENTER" prefHeight="562.0" prefWidth="714.0" spacing="18" style="-fx-background-color: #f5f0ff; -fx-padding: 18;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tlp2.queenspuzzle.controller.GameplayController">
 
@@ -13,14 +15,14 @@
     <VBox alignment="CENTER" spacing="10">
         <Label style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7b5ea7;" text="👑 Queens Puzzle" />
 
-              <!-- Regras resumidas -->
-        <VBox spacing="2" style="-fx-background-color: #ede8ff; -fx-padding: 8 14; -fx-background-radius: 10;">
-            <Label style="-fx-font-size: 11; -fx-text-fill: #9b80c4;" text="• uma rainha por cor" />
-         <Label layoutX="24.0" layoutY="18.0" style="-fx-font-size: 11; -fx-text-fill: #9b80c4;" text="• sem rainhas na mesma linha ou coluna" />
-            <Label style="-fx-font-size: 11; -fx-text-fill: #9b80c4;" text="• rainhas não podem ser adjacentes (nem diagonal)" />
-        </VBox>
-
-              <GridPane fx:id="gridTabuleiro" style="-fx-border-color: #d8b7fe; -fx-border-width: 2.5; -fx-border-radius: 4; -fx-background-color: white;" />
+              <GridPane fx:id="gridTabuleiro" style="-fx-border-color: #d8b7fe; -fx-border-width: 2.5; -fx-border-radius: 4; -fx-background-color: white;">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.48235294222831726" green="0.37254902720451355" blue="0.7372549176216125" />
+               </color>
+            </DropShadow>
+         </effect></GridPane>
 
               <Label fx:id="labelMensagem" maxWidth="360" style="-fx-font-size: 13; -fx-text-fill: #7b5ea7;" text="" wrapText="true" />
     </VBox>
@@ -29,7 +31,7 @@
     <VBox alignment="CENTER" prefWidth="185" spacing="10">
 
               <!-- Card de stats -->
-        <VBox spacing="7" style="-fx-background-color: white; -fx-padding: 14; -fx-background-radius: 14; -fx-border-color: #d8b7fe; -fx-border-width: 1.5; -fx-border-radius: 14;">
+        <VBox spacing="7" style="-fx-background-color: #f5f0ff; -fx-padding: 14; -fx-background-radius: 14; -fx-border-color: #d8b7fe; -fx-border-width: 1.5; -fx-border-radius: 14;">
             <Label fx:id="labelNome" style="-fx-text-fill: #7b5ea7; -fx-font-weight: bold; -fx-font-size: 13;" text="Jogador" />
             <Label fx:id="labelNivel" style="-fx-text-fill: #9b80c4; -fx-font-size: 12; -fx-font-weight: bold;" text="Nível 5×5" />
 
@@ -45,12 +47,19 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="6">
                 <Label style="-fx-font-size: 14; -fx-text-fill: #6eb4fa;" text="🕛" />
-                <Label fx:id="labelTempo" style="-fx-text-fill: #6eb4fa; -fx-font-weight: bold; -fx-font-size: 13;" text="90s" />
+                <Label fx:id="labelTempo" style="-fx-text-fill: #6eb4fa; -fx-font-weight: bold; -fx-font-size: 13;" />
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="6">
                 <Label style="-fx-font-size: 14; -fx-text-fill: #b87cfc;" text="👑" />
                 <Label fx:id="labelRainhas" style="-fx-text-fill: #b87cfc; -fx-font-size: 12; -fx-font-weight: bold;" text="Rainhas: 0/5" />
             </HBox>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.48235294222831726" green="0.37254902720451355" blue="0.7372549176216125" />
+               </color>
+            </DropShadow>
+         </effect>
         </VBox>
 
               <!-- Botões de ação -->
@@ -62,7 +71,7 @@
 
               <Button onAction="#aoClicarLoja" prefHeight="34" prefWidth="178" style="-fx-background-color: #bbc5ff; -fx-text-fill: #3a2080; -fx-background-radius: 10; -fx-border-color: #8b9fe8; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand; -fx-font-weight: bold;" text="🛒 Loja" />
 
-              <Button onAction="#aoClicarMenu" prefHeight="32" prefWidth="178" style="-fx-background-color: #f5f0ff; -fx-text-fill: #7b5ea7; -fx-background-radius: 10; -fx-border-color: #d8b7fe; -fx-border-radius: 10; -fx-border-width: 1; -fx-cursor: hand; -fx-font-weight: bold;" text="⬅ Menu" />
+              <Button onAction="#aoClicarMenu" prefHeight="32" prefWidth="178" style="-fx-background-color: #f5f0ff; -fx-text-fill: #7b5ea7; -fx-background-radius: 10; -fx-border-color: #d8b7fe; -fx-border-radius: 10; -fx-border-width: 1; -fx-cursor: hand; -fx-font-weight: bold;" text="Menu" />
     </VBox>
 
       </HBox>
