@@ -2,6 +2,7 @@ module com.tlp2.queenspuzzle {
 
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.media;
     requires java.sql;
 
     opens com.tlp2.queenspuzzle.dao;

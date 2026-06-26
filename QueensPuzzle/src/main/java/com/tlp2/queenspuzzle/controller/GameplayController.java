@@ -1,5 +1,6 @@
 package com.tlp2.queenspuzzle.controller;
 
+import com.tlp2.queenspuzzle.SoundManager;
 import com.tlp2.queenspuzzle.dao.JogadorDAO;
 import com.tlp2.queenspuzzle.dao.PartidaDAO;
 import com.tlp2.queenspuzzle.model.*;
@@ -242,7 +243,9 @@ public class GameplayController implements Initializable {
             tabuleiro.alternarRainha(linha, col);
         } 
         else {
+            boolean antes = tabuleiro.temMarcacao(linha, col);
             tabuleiro.alternarMarcacao(linha, col);
+            if (!antes) SoundManager.popTabuleiro(); // só toca ao adicionar X
         }
 
         desenharTabuleiro();
@@ -260,12 +263,18 @@ public class GameplayController implements Initializable {
             }
             
             tabuleiro.alternarRainha(linha, col);
+            SoundManager.popTabuleiro(); 
+
+            if (tabuleiro.estaEmConflito(linha, col)) {
+                SoundManager.erro();
+            }
         }
 
         desenharTabuleiro();
         atualizarInfos();
 
         if (tabuleiro.estaSolucionado()) {
+            SoundManager.win();
             timer.stop();
             int pontos = calcularPontos();
             sessao.adicionarPontos(pontos);
@@ -296,11 +305,13 @@ public class GameplayController implements Initializable {
             labelTempo.setText(tempoRestante + "s");
 
             if (tempoRestante <= 15) {
+                SoundManager.tictac();
                 labelTempo.setStyle("-fx-text-fill:  #e74c3c; -fx-font-weight: bold;");
             }
 
             if (tempoRestante <= 0) {
                 timer.stop();
+                SoundManager.lose();
                 labelMensagem.setText("Tempo esgotado!");
                 labelMensagem.setStyle("-fx-text-fill: #e74c3c;");
                 salvarPartida();
@@ -337,6 +348,7 @@ public class GameplayController implements Initializable {
 
     @FXML
     private void aoClicarDica() {
+        SoundManager.botao();
         if (dicasUsadas >= maxDicas) {
             labelMensagem.setText("Sem dicas disponíveis!");
             return;
@@ -353,6 +365,7 @@ public class GameplayController implements Initializable {
 
     @FXML
     private void aoClicarLimpar() {
+        SoundManager.botao();
         tabuleiro.limpar();
         desenharTabuleiro();
         labelMensagem.setText("");
@@ -361,6 +374,7 @@ public class GameplayController implements Initializable {
 
     @FXML
     private void aoClicarInventario() {
+        SoundManager.botao();
         try {
             javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/com/tlp2/queenspuzzle/view/Inventario.fxml"));
             javafx.scene.Parent root = loader.load();
@@ -409,12 +423,14 @@ public class GameplayController implements Initializable {
 
     @FXML
     private void aoClicarLoja() {
+        SoundManager.botao();
         if (timer != null) timer.stop();
         MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Loja.fxml");
     }
 
     @FXML
     private void aoClicarMenu() {
+        SoundManager.botao();
         if (timer != null) timer.stop();
         MainApp.trocarTela("/com/tlp2/queenspuzzle/view/MenuPrincipal.fxml");
     }

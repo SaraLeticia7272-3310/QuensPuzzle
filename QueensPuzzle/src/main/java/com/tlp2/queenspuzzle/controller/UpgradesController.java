@@ -1,6 +1,7 @@
 package com.tlp2.queenspuzzle.controller;
 
 import com.tlp2.queenspuzzle.MainApp;
+import com.tlp2.queenspuzzle.SoundManager;
 import com.tlp2.queenspuzzle.dao.UpgradeDAO;
 import com.tlp2.queenspuzzle.model.*;
 import javafx.fxml.FXML;
@@ -69,7 +70,9 @@ public class UpgradesController implements Initializable {
 
     @FXML
     private void aoClicarComprarDica() {
+        SoundManager.botao();
         if (pontosDisponiveis >= CUSTO_DICA) {
+            SoundManager.moeda();
             pontosDisponiveis -= CUSTO_DICA;
             sessao.getUpgradeAtual().setDicasExtras(sessao.getUpgradeAtual().getDicasExtras() + 1);
             salvarUpgrade();
@@ -83,7 +86,9 @@ public class UpgradesController implements Initializable {
 
     @FXML
     private void aoClicarComprarTempo() {
+        SoundManager.botao();
         if (pontosDisponiveis >= CUSTO_TEMPO) {
+            SoundManager.moeda();
             pontosDisponiveis -= CUSTO_TEMPO;
             sessao.getUpgradeAtual().setTempoBonus(sessao.getUpgradeAtual().getTempoBonus() + 15);
             salvarUpgrade();
@@ -96,7 +101,9 @@ public class UpgradesController implements Initializable {
     
     @FXML
     private void aoClicarComprarPontos() {
+        SoundManager.botao();
         if (pontosDisponiveis >= CUSTO_PONTOS) {
+            SoundManager.moeda();
             pontosDisponiveis -= CUSTO_PONTOS;
             sessao.getUpgradeAtual().setPontosBonus(sessao.getUpgradeAtual().getPontosBonus() + 50);
             salvarUpgrade();
@@ -120,6 +127,7 @@ public class UpgradesController implements Initializable {
 
     @FXML
     private void aoClicarJogarNovamente() {
+        SoundManager.botao();
 
        Jogador j = sessao.getJogadorAtual();
 
@@ -134,11 +142,13 @@ public class UpgradesController implements Initializable {
     
     @FXML
     private void aoClicarLoja() {
+        SoundManager.botao();
         MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Loja.fxml");
     }
 
     @FXML
     private void aoClicarMenu() {
+        SoundManager.botao();
         MainApp.trocarTela("/com/tlp2/queenspuzzle/view/MenuPrincipal.fxml");
     }
 }

@@ -1,5 +1,6 @@
 package com.tlp2.queenspuzzle.controller;
 
+import com.tlp2.queenspuzzle.SoundManager;
 import com.tlp2.queenspuzzle.dao.JogadorDAO;
 import com.tlp2.queenspuzzle.dao.PartidaDAO;
 import com.tlp2.queenspuzzle.model.*;
@@ -181,6 +182,7 @@ public class BossController implements Initializable {
             } 
             else {
                 tabuleiro.alternarMarcacao(linha, col);
+                SoundManager.popTabuleiro(); // som ao adicionar X
             }
 
             desenharTabuleiro();
@@ -193,11 +195,17 @@ public class BossController implements Initializable {
     }
     if (!tabuleiro.temRainha(linha, col)) {
         tabuleiro.alternarRainha(linha, col);
+        SoundManager.popTabuleiro(); // som ao colocar rainha
+
+        if (tabuleiro.estaEmConflito(linha, col)) {
+            SoundManager.erro();
+        }
     }
 
     desenharTabuleiro();
 
     if (tabuleiro.estaSolucionado()) {
+        SoundManager.win();
         timer.stop();
 
         int pontos = 800 + (tempoRestante * 10) + sessao.getUpgradeAtual().getPontosBonus();
@@ -226,12 +234,14 @@ public class BossController implements Initializable {
 
     private void iniciarTimer() {
         timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            SoundManager.tictac();
             tempoRestante--;
             labelTempo.setText("Tempo: " + tempoRestante + "s");
             if (tempoRestante <= 15) labelTempo.setStyle("-fx-text-fill:  #e74c3c; -fx-font-weight: bold;");
 
             if (tempoRestante <= 0) {
                 timer.stop();
+                SoundManager.lose();
                 labelMensagem.setText("Você não venceu o boss desta vez!");
                 Timeline espera = new Timeline(new KeyFrame(Duration.seconds(2), ev -> MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Upgrades.fxml")));
                 espera.play();
@@ -243,12 +253,14 @@ public class BossController implements Initializable {
 
     @FXML 
     private void aoClicarLimpar() { 
+        SoundManager.botao();
         tabuleiro.limpar(); 
         desenharTabuleiro(); 
     }
     
     @FXML 
     private void aoClicarMenu() { 
+        SoundManager.botao();
         if (timer != null) timer.stop(); 
         MainApp.trocarTela("/com/tlp2/queenspuzzle/view/MenuPrincipal.fxml"); 
     }

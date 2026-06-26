@@ -1,6 +1,7 @@
 package com.tlp2.queenspuzzle.controller;
 
 import com.tlp2.queenspuzzle.MainApp;
+import com.tlp2.queenspuzzle.SoundManager;
 import com.tlp2.queenspuzzle.dao.JogadorDAO;
 import com.tlp2.queenspuzzle.model.Jogador;
 import com.tlp2.queenspuzzle.model.LinhaRanking;
@@ -93,6 +94,7 @@ public class RankingController implements Initializable {
 
     @FXML
     private void aoClicarExportarCSV() {
+        SoundManager.botao();
 
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Salvar Ranking CSV");
@@ -123,6 +125,7 @@ public class RankingController implements Initializable {
 
     @FXML
     private void aoClicarExportarTXT() {
+        SoundManager.botao();
 
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Salvar Ranking TXT");
@@ -154,6 +157,7 @@ public class RankingController implements Initializable {
 
     @FXML
     private void aoClicarVoltar() {
+        SoundManager.botao();
         MainApp.trocarTela("/com/tlp2/queenspuzzle/view/MenuPrincipal.fxml");
     }
 }

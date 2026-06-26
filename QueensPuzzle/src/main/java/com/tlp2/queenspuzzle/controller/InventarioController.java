@@ -1,5 +1,6 @@
 package com.tlp2.queenspuzzle.controller;
 
+import com.tlp2.queenspuzzle.SoundManager;
 import com.tlp2.queenspuzzle.model.Item;
 import static com.tlp2.queenspuzzle.model.Item.Tipo.AMULETO_PONTOS;
 import static com.tlp2.queenspuzzle.model.Item.Tipo.CHAVE_DICA;
@@ -119,6 +120,7 @@ public class InventarioController implements Initializable {
     }
 
     private void usarItem(Item item, Label nomeLbl) {
+        SoundManager.botao();
         SessaoJogo sessao = SessaoJogo.getInstance();
 
         if (item.getQuantidade() <= 0) {
@@ -127,20 +129,16 @@ public class InventarioController implements Initializable {
             return;
         }
 
-        // Diminui quantidade
         item.setQuantidade(item.getQuantidade() - 1);
 
-        // Remove do inventário se zerou
         if (item.getQuantidade() == 0) {
             sessao.getInventario().remove(item);
         }
 
-        // Dispara o efeito no GameplayController
         if (onItemUsado != null) {
             onItemUsado.accept(item);
         }
 
-        // Mensagem de feedback
         switch (item.getTipo()) {
             case POCAO_TEMPO:
                 labelMensagem.setText("✓ +30 segundos adicionados!");
@@ -161,6 +159,7 @@ public class InventarioController implements Initializable {
 
     @FXML
     private void aoClicarFechar() {
+        SoundManager.botao();
         Stage stage = (Stage) listaItens.getScene().getWindow();
         stage.close();
     }

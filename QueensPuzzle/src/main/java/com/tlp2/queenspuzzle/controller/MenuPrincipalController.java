@@ -1,5 +1,6 @@
 package com.tlp2.queenspuzzle.controller;
 
+import com.tlp2.queenspuzzle.SoundManager;
 import com.tlp2.queenspuzzle.dao.JogadorDAO;
 import com.tlp2.queenspuzzle.dao.UpgradeDAO;
 import com.tlp2.queenspuzzle.MainApp;
@@ -29,6 +30,7 @@ public class MenuPrincipalController {
     
     @FXML
     private void aoClicarJogar() {
+        SoundManager.botao();
         String nome = campoNome.getText().trim();
 
         if (nome.isEmpty()) {
@@ -67,6 +69,7 @@ public class MenuPrincipalController {
 
     @FXML
     private void aoClicarLoja() {
+        SoundManager.botao();
         SessaoJogo sessao = SessaoJogo.getInstance();
         if (sessao.getJogadorAtual() == null || sessao.getUpgradeAtual() == null) {
             labelMensagem.setText("Digite seu nome para acessar a loja!");
@@ -77,11 +80,13 @@ public class MenuPrincipalController {
 
     @FXML
     private void aoClicarRanking() {
+        SoundManager.botao();
         MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Ranking.fxml");
     }
 
     @FXML
     private void aoClicarComoJogar() {
+        SoundManager.botao();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tlp2/queenspuzzle/view/ComoJogar.fxml"));
 
@@ -100,11 +105,13 @@ public class MenuPrincipalController {
     
     @FXML
     private void aoClicarCreditos() {
+        SoundManager.botao();
         MainApp.trocarTela("/com/tlp2/queenspuzzle/view/Creditos.fxml");
     }
 
     @FXML
     private void aoClicarEncerrar() {
+        SoundManager.botao();
         System.exit(0);
     }
 }
