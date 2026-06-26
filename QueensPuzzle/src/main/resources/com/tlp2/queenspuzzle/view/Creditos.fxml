@@ -34,10 +34,13 @@
         <!-- Tecnologias -->
         <HBox alignment="CENTER" spacing="10">
             <VBox alignment="CENTER" spacing="4">
-                <Label style="-fx-text-fill: #9b80c4; -fx-font-weight: bold; -fx-font-size: 12;" text="Professor" />
-                <HBox alignment="CENTER" spacing="8">
-                    <Label style="-fx-text-fill: #ef82db; -fx-font-size: 15; -fx-font-weight: bold;" text="Mateus Ribeiro Amado" />
-                </HBox>
+                <Label style="-fx-text-fill: #9b80c4; -fx-font-weight: bold; -fx-font-size: 12;" text="Tecnologias utilizadas" />
+            <VBox alignment="CENTER">
+               <children>
+                       <Label style="-fx-text-fill: #ef82db; -fx-font-size: 15; -fx-font-weight: bold;" text="JavaFX Media • Java • JDBC • Maven" />
+                  <Label style="-fx-text-fill: #ef82db; -fx-font-size: 15; -fx-font-weight: bold;" text="PostgreSQL • JavaFX • FXML • JavaFX CSS" />
+               </children>
+            </VBox>
             </VBox>
         </HBox>
       <effect>
