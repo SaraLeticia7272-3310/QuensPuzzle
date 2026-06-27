@@ -1,0 +1,32 @@
+CREATE TABLE jogador (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL UNIQUE,
+    pontuacao_total INTEGER NOT NULL DEFAULT 0,
+    nivel_maximo INTEGER NOT NULL DEFAULT 4
+);
+
+CREATE TABLE upgrade (
+    id SERIAL PRIMARY KEY,
+    jogador_id INTEGER NOT NULL,
+    dicas_extras INTEGER NOT NULL DEFAULT 0,
+    tempo_bonus INTEGER NOT NULL DEFAULT 0,
+    pontos_bonus INTEGER NOT NULL DEFAULT 0,
+
+    CONSTRAINT fk_upgrade_jogador
+        FOREIGN KEY (jogador_id)
+        REFERENCES jogador(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE partida (
+    id SERIAL PRIMARY KEY,
+    jogador_id INTEGER NOT NULL,
+    pontuacao INTEGER NOT NULL,
+    nivel INTEGER NOT NULL,
+    data_hora TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_partida_jogador
+        FOREIGN KEY (jogador_id)
+        REFERENCES jogador(id)
+        ON DELETE CASCADE
+);
